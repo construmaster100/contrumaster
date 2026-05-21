@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Construmaster — Cotizar</title>
+<title>Construmaster — Licencias</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -774,6 +774,416 @@ footer {
 </style>
 
 </head>
+<style>
+/* ═══════════════════════════════════════
+   DIGITACIÓN DE PLANOS — página
+═══════════════════════════════════════ */
+
+/* ── Hero ── */
+.dp-hero {
+  text-align: center;
+  padding: 56px 40px 38px;
+}
+.dp-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(180deg, #ff8c28 0%, #e86000 35%, #c85000 70%, #d96800 100%);
+  border-top: 1.5px solid rgba(255,210,140,.80);
+  border-left: 1.5px solid rgba(255,190,100,.60);
+  border-right: 1.5px solid rgba(120,40,0,.55);
+  border-bottom: 1.5px solid rgba(80,20,0,.70);
+  border-radius: 4px;
+  padding: 6px 20px 6px 14px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.92);
+  box-shadow: 0 3px 8px rgba(0,0,0,.40), 0 1px 0 rgba(255,220,150,.60) inset;
+  margin-bottom: 20px;
+}
+.dp-hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(36px, 5.8vw, 70px);
+  letter-spacing: 5px;
+  color: var(--gold);
+  line-height: 1.04;
+  margin-bottom: 16px;
+}
+.dp-hero-desc {
+  max-width: 660px;
+  margin: 0 auto;
+  color: #333;
+  font-size: 15px;
+  line-height: 1.72;
+  opacity: .88;
+}
+
+/* ── Services masonry grid ── */
+.dp-services-wrap {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 40px 56px;
+}
+.dp-services-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(22px, 3.5vw, 36px);
+  letter-spacing: 4px;
+  color: var(--gold);
+  margin-bottom: 24px;
+  text-align: center;
+}
+.dp-services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+}
+.dp-service-item {
+  background: rgba(255,255,255,.84);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 8px;
+  border: 1.5px solid rgba(255,107,0,.20);
+  padding: 18px 18px 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  box-shadow: 0 3px 12px rgba(0,0,0,.07);
+  transition: transform .20s, box-shadow .20s, border-color .20s;
+}
+.dp-service-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 20px rgba(0,0,0,.11);
+  border-color: rgba(255,107,0,.45);
+}
+.dp-service-item .svc-bullet {
+  min-width: 28px; height: 28px;
+  background: linear-gradient(135deg, #ff8c28, #cc5500);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  box-shadow: 0 2px 6px rgba(200,85,0,.32);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.dp-service-item p {
+  font-size: 13px;
+  color: #222;
+  font-weight: 500;
+  line-height: 1.50;
+}
+
+/* ── Main layout: upload + pricing ── */
+.dp-main-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 28px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 40px 70px;
+  align-items: start;
+}
+
+/* ── Shared panel shell ── */
+.dp-panel {
+  background: rgba(255,255,255,.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 9px;
+  border: 1.5px solid rgba(255,107,0,.26);
+  box-shadow: 0 6px 24px rgba(0,0,0,.09), 0 1px 0 rgba(255,255,255,.90) inset;
+  overflow: hidden;
+}
+.dp-panel-header {
+  background: linear-gradient(180deg, #ff8c28 0%, #e86000 35%, #c85000 70%, #d96800 100%);
+  padding: 15px 22px;
+  display: flex; align-items: center; gap: 11px;
+  border-bottom: 2px solid #8a3300;
+}
+.dp-panel-header h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px; letter-spacing: 3px; color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,.50);
+}
+.dp-panel-header .ph-icon { font-size: 19px; }
+
+/* ── Upload section ── */
+.dp-upload-body { padding: 18px 22px 0; }
+.dp-upload-intro {
+  font-size: 13px; color: #444; line-height: 1.68;
+  margin-bottom: 16px;
+}
+
+/* Drop zone */
+.dp-dropzone {
+  border: 2px dashed rgba(255,107,0,.45);
+  border-radius: 8px;
+  padding: 32px 20px;
+  text-align: center;
+  background: rgba(255,107,0,.04);
+  cursor: pointer;
+  transition: border-color .20s, background .20s;
+  position: relative;
+  margin-bottom: 16px;
+}
+.dp-dropzone:hover, .dp-dropzone.drag-over {
+  border-color: var(--gold);
+  background: rgba(255,107,0,.09);
+}
+.dp-dropzone input[type="file"] {
+  position: absolute; inset: 0; opacity: 0;
+  width: 100%; height: 100%; cursor: pointer;
+}
+.dp-dropzone .dz-icon { font-size: 36px; margin-bottom: 10px; }
+.dp-dropzone .dz-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 17px; letter-spacing: 2px; color: var(--gold);
+  margin-bottom: 5px;
+}
+.dp-dropzone .dz-sub {
+  font-size: 11.5px; color: #666; line-height: 1.55;
+}
+
+/* File list */
+.dp-file-list {
+  list-style: none;
+  padding: 0; margin: 0 0 14px;
+  max-height: 180px; overflow-y: auto;
+}
+.dp-file-list:empty { display: none; }
+.dp-file-list li {
+  display: flex; align-items: center; gap: 10px;
+  padding: 7px 10px;
+  border-radius: 5px;
+  background: rgba(255,107,0,.06);
+  border: 1px solid rgba(255,107,0,.14);
+  margin-bottom: 6px;
+  font-size: 12px; color: #333;
+}
+.dp-file-list li .file-icon { font-size: 16px; flex-shrink: 0; }
+.dp-file-list li .file-name { flex: 1; word-break: break-all; line-height: 1.35; }
+.dp-file-list li .file-rm {
+  cursor: pointer; color: #cc4400; font-size: 16px;
+  line-height: 1; flex-shrink: 0;
+  transition: color .15s;
+}
+.dp-file-list li .file-rm:hover { color: #ff2200; }
+
+/* Contact row */
+.dp-contact-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  margin-bottom: 14px;
+}
+.dp-field-group { display: flex; flex-direction: column; gap: 5px; }
+.dp-field-group.full { grid-column: 1 / -1; }
+.dp-field-group label {
+  font-size: 10px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--gold);
+}
+.dp-field-group input,
+.dp-field-group textarea {
+  background: rgba(255,255,255,.55);
+  border: 1px solid rgba(200,200,200,.55);
+  border-radius: 4px; padding: 10px 12px;
+  font-family: 'Barlow', sans-serif; font-size: 14px; color: #1a1a1a;
+  transition: border-color .2s;
+}
+.dp-field-group input:focus,
+.dp-field-group textarea:focus { outline: none; border-color: var(--gold); }
+.dp-field-group textarea { resize: vertical; min-height: 78px; }
+
+.dp-btn-send {
+  display: block; width: 100%;
+  margin-bottom: 22px;
+  background: linear-gradient(180deg, #ff8c28 0%, #e86000 35%, #c85000 70%, #d96800 100%);
+  color: #fff; border: none;
+  border-top: 1.5px solid rgba(255,210,140,.80);
+  border-left: 1.5px solid rgba(255,190,100,.60);
+  border-right: 1.5px solid rgba(120,40,0,.55);
+  border-bottom: 1.5px solid rgba(80,20,0,.70);
+  padding: 14px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 19px; letter-spacing: 3px;
+  border-radius: 4px; cursor: pointer;
+  box-shadow: 0 1px 0 rgba(255,220,150,.70) inset, 0 4px 10px rgba(0,0,0,.35);
+  transition: transform .12s, box-shadow .12s;
+}
+.dp-btn-send:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 1px 0 rgba(255,230,160,.80) inset, 0 6px 14px rgba(0,0,0,.42);
+}
+.dp-btn-send:active { transform: translateY(0); }
+
+.dp-success {
+  display: none; text-align: center;
+  padding: 30px 22px 26px;
+  color: var(--gold);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 21px; letter-spacing: 2px;
+}
+.dp-success .si { font-size: 48px; display: block; margin-bottom: 10px; }
+
+/* ── Pricing + payment side panel ── */
+.dp-side-stack { display: flex; flex-direction: column; gap: 22px; }
+
+/* Pricing card */
+.dp-price-card {
+  background: rgba(255,255,255,.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 9px;
+  border: 1.5px solid rgba(255,107,0,.26);
+  box-shadow: 0 6px 24px rgba(0,0,0,.09);
+  overflow: hidden;
+  text-align: center;
+}
+.dp-price-body { padding: 28px 22px 24px; }
+.dp-price-label {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  color: #888; margin-bottom: 10px;
+}
+.dp-price-amount {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 48px; letter-spacing: 2px;
+  color: var(--gold); line-height: 1;
+  margin-bottom: 2px;
+}
+.dp-price-currency {
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px; font-weight: 700;
+  color: #999; letter-spacing: 2px;
+  text-transform: uppercase; margin-bottom: 12px;
+}
+.dp-price-note {
+  font-size: 12px; color: #555; line-height: 1.60;
+}
+.dp-price-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,107,0,.30), transparent);
+  margin: 0 22px;
+}
+.dp-price-footer {
+  padding: 14px 22px 18px;
+  font-size: 11.5px; color: #666; line-height: 1.55;
+  background: rgba(255,107,0,.03);
+}
+
+/* Nequi payment card */
+.dp-nequi-card {
+  background: rgba(255,255,255,.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 9px;
+  border: 1.5px solid rgba(255,107,0,.26);
+  box-shadow: 0 6px 24px rgba(0,0,0,.09);
+  overflow: hidden;
+}
+.dp-nequi-body { padding: 22px 22px 20px; text-align: center; }
+.dp-nequi-logo {
+  width: 88px; height: 88px;
+  background: linear-gradient(135deg, #6c1fc8 0%, #9b30ff 40%, #c26aff 100%);
+  border-radius: 20px;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 14px;
+  box-shadow: 0 6px 20px rgba(108,31,200,.35);
+  font-size: 38px;
+}
+.dp-nequi-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px; letter-spacing: 3px; color: #6c1fc8;
+  margin-bottom: 4px;
+}
+.dp-nequi-sub {
+  font-size: 11px; color: #888;
+  letter-spacing: 2px; text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.dp-nequi-number {
+  display: inline-block;
+  background: linear-gradient(135deg, rgba(108,31,200,.10), rgba(155,48,255,.08));
+  border: 1.5px solid rgba(108,31,200,.28);
+  border-radius: 6px;
+  padding: 10px 20px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 26px; letter-spacing: 4px; color: #6c1fc8;
+  box-shadow: 0 2px 8px rgba(108,31,200,.12);
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: background .18s, transform .12s;
+  user-select: all;
+}
+.dp-nequi-number:hover {
+  background: linear-gradient(135deg, rgba(108,31,200,.17), rgba(155,48,255,.13));
+  transform: scale(1.03);
+}
+.dp-copy-hint {
+  font-size: 10.5px; color: #aaa; letter-spacing: 1.5px;
+  text-transform: uppercase; margin-bottom: 4px;
+}
+.dp-copied-toast {
+  font-size: 11px; color: #6c1fc8; font-weight: 700;
+  letter-spacing: 1.5px; opacity: 0;
+  transition: opacity .25s;
+  margin-top: 2px; min-height: 16px;
+}
+
+/* Steps row */
+.dp-steps-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 40px 60px;
+}
+.dp-step {
+  text-align: center;
+  padding: 28px 12px 24px;
+  position: relative;
+  background: rgba(255,255,255,.76);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-top: 3px solid rgba(255,107,0,.20);
+  border-bottom: 1px solid rgba(255,107,0,.10);
+}
+.dp-step:first-child { border-radius: 8px 0 0 8px; border-left: 1.5px solid rgba(255,107,0,.18); }
+.dp-step:last-child  { border-radius: 0 8px 8px 0; border-right: 1.5px solid rgba(255,107,0,.18); }
+.dp-step + .dp-step { border-left: 1px solid rgba(255,107,0,.12); }
+.dp-step-num {
+  position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+  width: 28px; height: 28px;
+  background: linear-gradient(135deg, #ff8c28, #cc5500);
+  color: #fff; font-size: 12px; font-weight: 900;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 3px 8px rgba(200,85,0,.40);
+}
+.dp-step-icon { font-size: 30px; margin: 8px 0 10px; }
+.dp-step-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 15px; letter-spacing: 2px; color: var(--gold);
+  margin-bottom: 5px;
+}
+.dp-step-desc { font-size: 11.5px; color: #555; line-height: 1.55; }
+
+/* Responsive */
+@media (max-width: 820px) {
+  .dp-main-layout { grid-template-columns: 1fr; padding: 0 20px 50px; }
+  .dp-services-wrap { padding: 0 20px 40px; }
+  .dp-steps-row { grid-template-columns: 1fr 1fr; padding: 0 20px 50px; }
+  .dp-step:first-child { border-radius: 8px 0 0 0; }
+  .dp-step:last-child  { border-radius: 0 0 8px 0; }
+  .dp-hero { padding: 36px 20px 26px; }
+}
+@media (max-width: 520px) {
+  .dp-contact-row { grid-template-columns: 1fr; }
+  .dp-steps-row { grid-template-columns: 1fr; }
+  .dp-step:first-child { border-radius: 8px 8px 0 0; }
+  .dp-step:last-child  { border-radius: 0 0 8px 8px; }
+}
+</style>
 <body style="padding-top: 168px;">
 
 
@@ -1017,369 +1427,330 @@ footer {
 
 
 <style>
-/* ─── COTIZAR (pagina 5) ─── */
-#cotizar-pg5 { background: #ffffff; padding-bottom: 80px; }
-#solicitar-pg5 { background: #f0f6ff; padding-bottom: 80px; }
-.cotizar-options {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 24px;
-  max-width: 960px;
-  margin: 0 auto 50px;
-  padding: 0 40px;
+/* ─── LICENCIAS (pagina 4) — override estilos del index ─── */
+#licencias-pg4 {
+  transform: none !important;
+  background: #f0f6ff !important;
+  padding-bottom: 80px;
+  box-shadow: none !important;
 }
-.cotizar-card {
-  border: 2px solid var(--gold);
-  border-radius: 6px;
-  padding: 32px 20px;
-  text-align: center;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.2s;
-  position: relative;
-  overflow: hidden;
-  background: #ffffff;
+#licencias-pg4::before { display: none !important; }
+#licencias-pg4 .section-header h2 {
+  display: block !important;
+  color: var(--gold) !important;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  padding: 0 !important;
 }
-.cotizar-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gold); }
-.cotizar-card:hover { background: rgba(255,107,0,0.07); transform: translateY(-4px); }
-.cotizar-card .icon { font-size: 40px; margin-bottom: 14px; }
-.cotizar-card h3 { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 2px; color: var(--gold); margin-bottom: 8px; }
-.cotizar-card p { font-size: 13px; line-height: 1.6; color: #1a3a5c; opacity: 0.8; }
-.cotizar-panel { display: none; max-width: 680px; margin: 0 auto; padding: 0 40px 40px; }
-.cotizar-panel.active { display: block; }
-.panel-title { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 3px; color: var(--gold); margin-bottom: 20px; text-align: center; }
-/* Override quote-form para pg5 */
-#cotizar-pg5 .quote-form, #solicitar-pg5 .quote-form {
+#licencias-pg4 .section-header p { color: #1a3a5c !important; opacity: 0.7 !important; }
+#licencias-pg4 .license-card {
   background: #ffffff !important;
   border: 2px solid var(--gold) !important;
+  box-shadow: none !important;
   backdrop-filter: none !important;
 }
-#cotizar-pg5 .form-group input,
-#cotizar-pg5 .form-group select,
-#cotizar-pg5 .form-group textarea,
-#solicitar-pg5 .form-group input,
-#solicitar-pg5 .form-group select,
-#solicitar-pg5 .form-group textarea {
-  background: #e8f0f8 !important;
-  border: 1px solid #aab !important;
-  color: #1a1a1a !important;
-}
-#cotizar-pg5 .btn-submit, #solicitar-pg5 .btn-submit { color: #fff !important; }
-#cotizar-pg5 .section-header h2, #solicitar-pg5 .section-header h2 { color: var(--gold) !important; background: none !important; border: none !important; box-shadow: none !important; text-shadow: none !important; padding: 0 !important; display: block !important; }
-#cotizar-pg5 .section-header p, #solicitar-pg5 .section-header p { color: #1a3a5c !important; opacity: 0.7 !important; }
-.quote-container { max-width: 680px; margin: 0 auto; padding: 0 40px; }
-@media (max-width: 768px) {
-  .cotizar-options { padding: 0 20px; }
-  .cotizar-panel { padding: 0 20px 40px; }
-  .quote-container { padding: 0 20px; }
-}
+#licencias-pg4 .license-card:hover { background: rgba(255,107,0,0.05) !important; }
+#licencias-pg4 .license-card h3 { color: var(--gold) !important; }
+#licencias-pg4 .license-card p { color: #1a3a5c !important; opacity: 0.8 !important; }
 </style>
 
-<!-- COTIZAR -->
-<section id="cotizar-pg5">
-  <div class="section-header">
-    <h2>Cotizar</h2>
-    <p>Selecciona el servicio que necesitas</p>
-  </div>
-
-  <div class="cotizar-options">
-
-    <a href="digitacion-planos.html" class="cotizar-card" id="plano" style="text-decoration: none; color: inherit;">
-      <div class="icon">📐</div>
-      <h3>Digitación de Plano</h3>
-      <p>Envianos tu plano en físico y lo digitalizamos en formato profesional.</p>
-    </a>
-
-    <div class="cotizar-card" id="presupuesto" onclick="abrirPanel('panel-presupuesto')">
-      <div class="icon">💰</div>
-      <h3>Solicitar Presupuesto</h3>
-      <p>Recibe un presupuesto detallado para tu proyecto de construcción o remodelación.</p>
-    </div>
-
-    <div class="cotizar-card" id="tecnica" onclick="abrirPanel('panel-tecnica')">
-      <div class="icon">🔧</div>
-      <h3>Consulta Técnica</h3>
-      <p>Resuelve dudas técnicas sobre normativas, estructuras o materiales con nuestros expertos.</p>
-    </div>
-
-    <div class="cotizar-card" id="visita" onclick="abrirPanel('panel-visita')">
-      <div class="icon">🏠</div>
-      <h3>Visita al Predio</h3>
-      <p>Agendamos una visita técnica a tu lote o propiedad para evaluar tu proyecto.</p>
-    </div>
-
-    <div class="cotizar-card" id="contacto" onclick="abrirPanel('panel-contacto')">
-      <div class="icon">📞</div>
-      <h3>Contacto</h3>
-      <p>Escríbenos directamente para cualquier consulta o información adicional.</p>
-    </div>
-
-  </div>
-
-  <!-- Panel: Digitación de Plano -->
-  <div class="cotizar-panel" id="panel-plano">
-    <div class="quote-form">
-      <div class="panel-title">📐 Digitación de Plano</div>
-      <div id="form-plano-area">
-        <div class="form-row">
-          <div class="form-group">
-            <label>Nombre completo</label>
-            <input type="text" id="p1-nombre" placeholder="Tu nombre">
-          </div>
-          <div class="form-group">
-            <label>Teléfono / WhatsApp</label>
-            <input type="tel" id="p1-telefono" placeholder="+57 300 000 0000">
-          </div>
-        </div>
-        <div class="form-group full">
-          <label>Descripción del plano</label>
-          <textarea id="p1-desc" placeholder="Tipo de plano, número de páginas, formato requerido..."></textarea>
-        </div>
-        <button class="btn-submit" onclick="enviar('p1-nombre','p1-telefono','p1-desc','Digitación de plano','form-plano-area','success-plano')">Solicitar Digitación</button>
-      </div>
-      <div class="form-success" id="success-plano">✅ ¡Solicitud Enviada!<br><span style="font-family:'Barlow',sans-serif;font-size:15px;opacity:0.8;">Te contactaremos en menos de 24 horas.</span></div>
-    </div>
-  </div>
-
-  <!-- Panel: Solicitar Presupuesto -->
-  <div class="cotizar-panel" id="panel-presupuesto">
-    <div class="quote-form">
-      <div class="panel-title">💰 Solicitar Presupuesto</div>
-      <div id="form-presupuesto-area">
-        <div class="form-row">
-          <div class="form-group">
-            <label>Nombre completo</label>
-            <input type="text" id="p2-nombre" placeholder="Tu nombre">
-          </div>
-          <div class="form-group">
-            <label>Teléfono / WhatsApp</label>
-            <input type="tel" id="p2-telefono" placeholder="+57 300 000 0000">
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Correo electrónico</label>
-            <input type="email" id="p2-correo" placeholder="correo@ejemplo.com">
-          </div>
-          <div class="form-group">
-            <label>Tipo de proyecto</label>
-            <select id="p2-tipo">
-              <option value="">Seleccionar...</option>
-              <option>Construcción nueva</option>
-              <option>Remodelación</option>
-              <option>Ampliación</option>
-              <option>Licencia de construcción</option>
-              <option>Diseño arquitectónico</option>
-              <option>Otro</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group full">
-          <label>Descripción del proyecto</label>
-          <textarea id="p2-desc" placeholder="Área, ciudad, presupuesto estimado..."></textarea>
-        </div>
-        <button class="btn-submit" onclick="enviar('p2-nombre','p2-telefono','p2-desc','Solicitar presupuesto','form-presupuesto-area','success-presupuesto')">Solicitar Presupuesto</button>
-      </div>
-      <div class="form-success" id="success-presupuesto">✅ ¡Solicitud Enviada!<br><span style="font-family:'Barlow',sans-serif;font-size:15px;opacity:0.8;">Te contactaremos en menos de 24 horas.</span></div>
-    </div>
-  </div>
-
-  <!-- Panel: Consulta Técnica -->
-  <div class="cotizar-panel" id="panel-tecnica">
-    <div class="quote-form">
-      <div class="panel-title">🔧 Consulta Técnica</div>
-      <div id="form-tecnica-area">
-        <div class="form-row">
-          <div class="form-group">
-            <label>Nombre completo</label>
-            <input type="text" id="p3-nombre" placeholder="Tu nombre">
-          </div>
-          <div class="form-group">
-            <label>Teléfono / WhatsApp</label>
-            <input type="tel" id="p3-telefono" placeholder="+57 300 000 0000">
-          </div>
-        </div>
-        <div class="form-group full">
-          <label>Consulta técnica</label>
-          <textarea id="p3-desc" placeholder="Describe tu consulta técnica con el mayor detalle posible..."></textarea>
-        </div>
-        <button class="btn-submit" onclick="enviar('p3-nombre','p3-telefono','p3-desc','Consulta técnica','form-tecnica-area','success-tecnica')">Enviar Consulta</button>
-      </div>
-      <div class="form-success" id="success-tecnica">✅ ¡Consulta Enviada!<br><span style="font-family:'Barlow',sans-serif;font-size:15px;opacity:0.8;">Te contactaremos en menos de 24 horas.</span></div>
-    </div>
-  </div>
-
-  <!-- Panel: Visita al Predio -->
-  <div class="cotizar-panel" id="panel-visita">
-    <div class="quote-form">
-      <div class="panel-title">🏠 Visita al Predio</div>
-      <div id="form-visita-area">
-        <div class="form-row">
-          <div class="form-group">
-            <label>Nombre completo</label>
-            <input type="text" id="p4-nombre" placeholder="Tu nombre">
-          </div>
-          <div class="form-group">
-            <label>Teléfono / WhatsApp</label>
-            <input type="tel" id="p4-telefono" placeholder="+57 300 000 0000">
-          </div>
-        </div>
-        <div class="form-group full">
-          <label>Dirección del predio</label>
-          <input type="text" id="p4-dir" placeholder="Ciudad, barrio, dirección">
-        </div>
-        <div class="form-group full">
-          <label>Descripción del proyecto</label>
-          <textarea id="p4-desc" placeholder="¿Qué deseas construir o evaluar en el predio?"></textarea>
-        </div>
-        <button class="btn-submit" onclick="enviarVisita()">Agendar Visita</button>
-      </div>
-      <div class="form-success" id="success-visita">✅ ¡Visita Agendada!<br><span style="font-family:'Barlow',sans-serif;font-size:15px;opacity:0.8;">Te contactaremos para confirmar la fecha.</span></div>
-    </div>
-  </div>
-
-  <!-- Panel: Contacto -->
-  <div class="cotizar-panel" id="panel-contacto">
-    <div class="quote-form">
-      <div class="panel-title">📞 Contacto</div>
-      <div id="form-contacto-area">
-        <div class="form-row">
-          <div class="form-group">
-            <label>Nombre completo</label>
-            <input type="text" id="p5-nombre" placeholder="Tu nombre">
-          </div>
-          <div class="form-group">
-            <label>Teléfono / WhatsApp</label>
-            <input type="tel" id="p5-telefono" placeholder="+57 300 000 0000">
-          </div>
-        </div>
-        <div class="form-group full">
-          <label>Mensaje</label>
-          <textarea id="p5-desc" placeholder="¿En qué podemos ayudarte?"></textarea>
-        </div>
-        <button class="btn-submit" onclick="enviar('p5-nombre','p5-telefono','p5-desc','Contacto general','form-contacto-area','success-contacto')">Enviar Mensaje</button>
-      </div>
-      <div class="form-success" id="success-contacto">✅ ¡Mensaje Enviado!<br><span style="font-family:'Barlow',sans-serif;font-size:15px;opacity:0.8;">Te respondemos pronto.</span></div>
-    </div>
-  </div>
-
-</section>
-
 <div class="section-divider"></div>
+<main>
 
-<!-- FORMULARIO SOLICITA TU COTIZACIÓN -->
-<section id="solicitar-pg5">
-  <div class="section-header">
-    <h2>Solicita tu Cotización</h2>
-    <p>Cuéntanos tu proyecto y te contactamos en menos de 24 horas</p>
+  <!-- ══ HERO ══ -->
+  <div class="dp-hero">
+    <div class="dp-hero-badge">✏️ &nbsp; Dibujo Técnico · Arquitectura Digital</div>
+    <h1>Digitación de Planos</h1>
+    <p class="dp-hero-desc">
+      Servicios de dibujo, desarrollo arquitectónico y virtualización de proyectos en AutoCAD,
+      Archicad y plataformas BIM. Desde la digitalización de croquis hasta el modelado 3D
+      y la producción de renders de alta calidad.
+    </p>
   </div>
 
-  <div class="quote-container">
-    <div class="quote-form">
-      <div id="mainFormArea">
-        <div class="form-row">
-          <div class="form-group">
-            <label>Nombre completo</label>
-            <input type="text" id="m-nombre" placeholder="Tu nombre">
-          </div>
-          <div class="form-group">
-            <label>Teléfono / WhatsApp</label>
-            <input type="tel" id="m-telefono" placeholder="+57 300 000 0000">
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Correo electrónico</label>
-            <input type="email" id="m-correo" placeholder="correo@ejemplo.com">
-          </div>
-          <div class="form-group">
-            <label>Tipo de proyecto</label>
-            <select id="m-tipo">
-              <option value="">Seleccionar...</option>
-              <option>Construcción nueva</option>
-              <option>Remodelación</option>
-              <option>Ampliación</option>
-              <option>Licencia de construcción</option>
-              <option>Diseño arquitectónico</option>
-              <option>Digitación de plano</option>
-              <option>Consulta técnica</option>
-              <option>Visita al predio</option>
-              <option>Otro</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-group full">
-          <label>Descripción del proyecto</label>
-          <textarea id="m-desc" placeholder="Cuéntanos más sobre tu proyecto: área, ciudad, presupuesto estimado, etc."></textarea>
-        </div>
-        <button class="btn-submit" onclick="enviarMain()">Solicitar Cotización</button>
+  <!-- ══ SERVICES GRID ══ -->
+  <div class="dp-services-wrap">
+    <div class="dp-services-title">Servicios de Dibujo y Desarrollo Arquitectónico</div>
+    <div class="dp-services-grid">
+      <div class="dp-service-item">
+        <span class="svc-bullet">📐</span>
+        <p>Digitación de planos en AutoCAD y Archicad</p>
       </div>
-      <div class="form-success" id="mainFormSuccess">
-        ✅ ¡Solicitud Enviada!<br>
-        <span style="font-family:'Barlow',sans-serif;font-size:15px;opacity:0.8;letter-spacing:1px;">
-          Te contactaremos en menos de 24 horas.
-        </span>
+      <div class="dp-service-item">
+        <span class="svc-bullet">🏗️</span>
+        <p>Modelado arquitectónico 3D</p>
+      </div>
+      <div class="dp-service-item">
+        <span class="svc-bullet">🖥️</span>
+        <p>Desarrollo BIM y virtualización de proyectos</p>
+      </div>
+      <div class="dp-service-item">
+        <span class="svc-bullet">🎬</span>
+        <p>Elaboración de videos renderizados</p>
+      </div>
+      <div class="dp-service-item">
+        <span class="svc-bullet">📋</span>
+        <p>Planos arquitectónicos y constructivos</p>
+      </div>
+      <div class="dp-service-item">
+        <span class="svc-bullet">🗺️</span>
+        <p>Planos de localización y urbanísticos</p>
+      </div>
+      <div class="dp-service-item">
+        <span class="svc-bullet">🚪</span>
+        <p>Planos de rutas de evacuación</p>
+      </div>
+      <div class="dp-service-item">
+        <span class="svc-bullet">📏</span>
+        <p>Levantamiento arquitectónico de planos</p>
+      </div>
+      <div class="dp-service-item">
+        <span class="svc-bullet">🔍</span>
+        <p>Digitalización de planos físicos y croquis</p>
+      </div>
+      <div class="dp-service-item">
+        <span class="svc-bullet">🎨</span>
+        <p>Elaboración gráfica y presentación técnica de proyectos</p>
       </div>
     </div>
   </div>
-</section>
+
+  <div class="section-divider"></div>
+
+  <!-- ══ PROCESS STEPS ══ -->
+  <div class="dp-steps-row" style="margin-top:50px;">
+    <div class="dp-step">
+      <div class="dp-step-num">1</div>
+      <div class="dp-step-icon">📤</div>
+      <div class="dp-step-title">Envío</div>
+      <div class="dp-step-desc">Adjunta tus planos, croquis o archivos por WhatsApp.</div>
+    </div>
+    <div class="dp-step">
+      <div class="dp-step-num">2</div>
+      <div class="dp-step-icon">💬</div>
+      <div class="dp-step-title">Cotización</div>
+      <div class="dp-step-desc">Revisamos el material y te enviamos el valor del servicio.</div>
+    </div>
+    <div class="dp-step">
+      <div class="dp-step-num">3</div>
+      <div class="dp-step-icon">💜</div>
+      <div class="dp-step-title">Pago</div>
+      <div class="dp-step-desc">Pago por Nequi para confirmar el inicio del trabajo.</div>
+    </div>
+    <div class="dp-step">
+      <div class="dp-step-num">4</div>
+      <div class="dp-step-icon">📁</div>
+      <div class="dp-step-title">Entrega</div>
+      <div class="dp-step-desc">Recibes los archivos digitales en el formato requerido.</div>
+    </div>
+  </div>
+
+  <div class="section-divider" style="margin-bottom:50px;"></div>
+
+  <!-- ══ UPLOAD + PRICING ══ -->
+  <div class="dp-main-layout">
+
+    <!-- Upload panel -->
+    <div class="dp-panel">
+      <div class="dp-panel-header">
+        <span class="ph-icon">📎</span>
+        <h3>Adjuntar Archivos del Proyecto</h3>
+      </div>
+      <div class="dp-upload-body">
+        <p class="dp-upload-intro">
+          Adjunta planos, imágenes, croquis, PDFs o cualquier documentación relacionada
+          para iniciar el proceso de desarrollo gráfico y digitalización.
+        </p>
+
+        <!-- Drop zone -->
+        <div class="dp-dropzone" id="dropzone">
+          <input type="file" id="fileInput" multiple
+            accept=".pdf,.dwg,.dxf,.jpg,.jpeg,.png,.heic,.bmp,.tif,.tiff,.doc,.docx,.zip"
+            onchange="handleFiles(this.files)">
+          <div class="dz-icon">📂</div>
+          <div class="dz-title">Arrastra archivos aquí</div>
+          <div class="dz-sub">o haz clic para seleccionar<br>
+            PDF · DWG · DXF · JPG · PNG · ZIP · DOC</div>
+        </div>
+
+        <!-- File list -->
+        <ul class="dp-file-list" id="fileList"></ul>
+
+        <!-- Contact fields -->
+        <div class="dp-contact-row">
+          <div class="dp-field-group">
+            <label for="dp-nombre">Nombre *</label>
+            <input type="text" id="dp-nombre" placeholder="Tu nombre">
+          </div>
+          <div class="dp-field-group">
+            <label for="dp-tel">Teléfono *</label>
+            <input type="tel" id="dp-tel" placeholder="+57 300 000 0000">
+          </div>
+          <div class="dp-field-group full">
+            <label for="dp-desc">Descripción del proyecto</label>
+            <textarea id="dp-desc" placeholder="Tipo de plano, escala, detalles especiales, formato de entrega…"></textarea>
+          </div>
+        </div>
+
+        <div id="sendArea">
+          <button class="dp-btn-send" onclick="enviarProyecto()">📲 &nbsp; Solicitar Cotización por WhatsApp</button>
+        </div>
+        <div class="dp-success" id="dpSuccess">
+          <span class="si">✅</span>
+          ¡Solicitud enviada!<br>
+          <span style="font-size:13px;font-family:'Barlow',sans-serif;font-weight:400;letter-spacing:1px;color:#555;">
+            Te contactaremos para confirmar la cotización.
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Side: pricing + Nequi -->
+    <div class="dp-side-stack">
+
+      <!-- Pricing -->
+      <div class="dp-price-card">
+        <div class="dp-panel-header">
+          <span class="ph-icon">💰</span>
+          <h3>Valor del Servicio</h3>
+        </div>
+        <div class="dp-price-body">
+          <div class="dp-price-label">Precio desde</div>
+          <div class="dp-price-amount">$200.000</div>
+          <div class="dp-price-currency">COP · por pliego arquitectónico</div>
+          <p class="dp-price-note">
+            El valor varía acorde al nivel de detalle, información
+            suministrada y requerimientos específicos del proyecto.
+            Solicita tu cotización personalizada.
+          </p>
+        </div>
+        <div class="dp-price-divider"></div>
+        <div class="dp-price-footer">
+          📐 Incluye archivo digital en formato solicitado (DWG, PDF, RVT u otro)<br>
+          🔄 Revisiones incluidas según alcance acordado
+        </div>
+      </div>
+
+      <!-- Nequi -->
+      <div class="dp-nequi-card">
+        <div class="dp-panel-header">
+          <span class="ph-icon">💳</span>
+          <h3>Método de Pago</h3>
+        </div>
+        <div class="dp-nequi-body">
+          <div class="dp-nequi-logo">💜</div>
+          <div class="dp-nequi-name">Nequi</div>
+          <div class="dp-nequi-sub">Transferencia inmediata</div>
+          <div class="dp-copy-hint">Toca el número para copiar</div>
+          <div class="dp-nequi-number" id="nequiNum" onclick="copyNequi()" title="Copiar número">
+            313 395 4816
+          </div>
+          <div class="dp-copied-toast" id="copiedToast">✓ &nbsp; Número copiado</div>
+          <p style="font-size:11.5px;color:#666;line-height:1.60;margin-top:10px;">
+            Realiza el pago una vez confirmada la cotización.
+            Envía el comprobante por WhatsApp para agilizar el inicio del trabajo.
+          </p>
+        </div>
+      </div>
+
+    </div><!-- /side-stack -->
+  </div><!-- /dp-main-layout -->
+
+</main>
 
 <script>
-function abrirPanel(id) {
-  document.querySelectorAll('.cotizar-panel').forEach(p => p.classList.remove('active'));
-  const panel = document.getElementById(id);
-  panel.classList.add('active');
-  panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-function enviar(campoNombre, campoTel, campoDesc, servicio, areaId, successId) {
-  const nombre = document.getElementById(campoNombre).value.trim();
-  const telefono = document.getElementById(campoTel).value.trim();
-  if (!nombre || !telefono) { alert("Por favor completa al menos tu nombre y teléfono."); return; }
-  const desc = document.getElementById(campoDesc) ? document.getElementById(campoDesc).value : '';
-  const msg = encodeURIComponent(`Hola Construmaster, quiero: *${servicio}*
+/* ── Drop zone drag events ── */
+const dz = document.getElementById('dropzone');
+dz.addEventListener('dragover',  e => { e.preventDefault(); dz.classList.add('drag-over'); });
+dz.addEventListener('dragleave', () => dz.classList.remove('drag-over'));
+dz.addEventListener('drop', e => {
+  e.preventDefault();
+  dz.classList.remove('drag-over');
+  handleFiles(e.dataTransfer.files);
+});
 
-*Nombre:* ${nombre}
-*Teléfono:* ${telefono}
-*Detalle:* ${desc}`);
-  window.open(`https://wa.me/573133954816?text=${msg}`, "_blank");
-  document.getElementById(areaId).style.display = "none";
-  document.getElementById(successId).style.display = "block";
-}
-function enviarVisita() {
-  const nombre = document.getElementById("p4-nombre").value.trim();
-  const telefono = document.getElementById("p4-telefono").value.trim();
-  if (!nombre || !telefono) { alert("Por favor completa al menos tu nombre y teléfono."); return; }
-  const dir = document.getElementById("p4-dir").value || 'No indicada';
-  const desc = document.getElementById("p4-desc").value || 'Sin descripción';
-  const msg = encodeURIComponent(`Hola Construmaster, quiero agendar una *Visita al Predio*
+let selectedFiles = [];
 
-*Nombre:* ${nombre}
-*Teléfono:* ${telefono}
-*Dirección:* ${dir}
-*Proyecto:* ${desc}`);
-  window.open(`https://wa.me/573133954816?text=${msg}`, "_blank");
-  document.getElementById("form-visita-area").style.display = "none";
-  document.getElementById("success-visita").style.display = "block";
-}
-function enviarMain() {
-  const nombre = document.getElementById("m-nombre").value.trim();
-  const telefono = document.getElementById("m-telefono").value.trim();
-  if (!nombre || !telefono) { alert("Por favor completa al menos tu nombre y teléfono."); return; }
-  const tipo = document.getElementById("m-tipo").value || "No especificado";
-  const correo = document.getElementById("m-correo").value || "No indicado";
-  const desc = document.getElementById("m-desc").value || "Sin descripción";
-  const msg = encodeURIComponent(`Hola Construmaster, quiero cotizar:
+const FILE_ICONS = {
+  pdf: '📄', dwg: '📐', dxf: '📐',
+  jpg: '🖼️', jpeg: '🖼️', png: '🖼️', heic: '🖼️', bmp: '🖼️', tif: '🖼️', tiff: '🖼️',
+  doc: '📝', docx: '📝', zip: '🗜️'
+};
 
-*Nombre:* ${nombre}
-*Teléfono:* ${telefono}
-*Correo:* ${correo}
-*Tipo de proyecto:* ${tipo}
-*Descripción:* ${desc}`);
-  window.open(`https://wa.me/573133954816?text=${msg}`, "_blank");
-  document.getElementById("mainFormArea").style.display = "none";
-  document.getElementById("mainFormSuccess").style.display = "block";
+function iconFor(name) {
+  const ext = name.split('.').pop().toLowerCase();
+  return FILE_ICONS[ext] || '📎';
+}
+
+function handleFiles(files) {
+  Array.from(files).forEach(f => {
+    if (!selectedFiles.find(x => x.name === f.name && x.size === f.size)) {
+      selectedFiles.push(f);
+    }
+  });
+  renderFileList();
+}
+
+function renderFileList() {
+  const ul = document.getElementById('fileList');
+  ul.innerHTML = '';
+  selectedFiles.forEach((f, i) => {
+    const li = document.createElement('li');
+    const sizeMB = (f.size / 1024 / 1024).toFixed(2);
+    li.innerHTML = `
+      <span class="file-icon">${iconFor(f.name)}</span>
+      <span class="file-name">${f.name}<br>
+        <span style="font-size:10px;color:#999;">${sizeMB} MB</span>
+      </span>
+      <span class="file-rm" onclick="removeFile(${i})" title="Eliminar">✕</span>`;
+    ul.appendChild(li);
+  });
+}
+
+function removeFile(i) {
+  selectedFiles.splice(i, 1);
+  renderFileList();
+}
+
+/* ── WhatsApp send ── */
+function enviarProyecto() {
+  const nombre = document.getElementById('dp-nombre').value.trim();
+  const tel    = document.getElementById('dp-tel').value.trim();
+  if (!nombre || !tel) { alert('Por favor completa tu nombre y teléfono.'); return; }
+  const desc = document.getElementById('dp-desc').value.trim() || 'Sin descripción';
+
+  let msg = '✏️ *DIGITACIÓN DE PLANOS — Construmaster*\n\n';
+  msg += `*Nombre:* ${nombre}\n*Teléfono:* ${tel}\n*Descripción:* ${desc}\n\n`;
+  if (selectedFiles.length) {
+    msg += `*Archivos a enviar (${selectedFiles.length}):*\n`;
+    selectedFiles.forEach(f => { msg += `📎 ${f.name}\n`; });
+    msg += '\n_(Adjunta los archivos en esta misma conversación)_';
+  } else {
+    msg += '_No se adjuntaron archivos previos. Los enviaré en esta conversación._';
+  }
+
+  window.open('https://wa.me/573133954816?text=' + encodeURIComponent(msg), '_blank');
+  document.getElementById('sendArea').style.display  = 'none';
+  document.getElementById('dpSuccess').style.display = 'block';
+}
+
+/* ── Copy Nequi number ── */
+function copyNequi() {
+  const num = '3133954816';
+  navigator.clipboard.writeText(num).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = num; document.body.appendChild(ta);
+    ta.select(); document.execCommand('copy');
+    document.body.removeChild(ta);
+  });
+  const toast = document.getElementById('copiedToast');
+  toast.style.opacity = '1';
+  setTimeout(() => { toast.style.opacity = '0'; }, 2200);
 }
 </script>
-
+<div class="section-divider"></div>
 
 <!-- FOOTER -->
 <footer>
@@ -1792,3 +2163,13 @@ function enviarCotizacion() {
 
 </body>
 </html>
+<style id="patch-pg4-bg">
+/* Quitar fondos sólidos restantes en pagina 4 */
+#licencias-pg4 { background: transparent !important; }
+.license-card {
+  background: rgba(255,255,255,0.18) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+.license-card:hover { background: rgba(255,107,0,0.10) !important; }
+</style>
