@@ -774,6 +774,354 @@ footer {
 </style>
 
 </head>
+
+<style>
+/* ═══════════════════════════════════════
+   SERVICIOS TÉCNICOS — página
+═══════════════════════════════════════ */
+
+/* ── Page hero ── */
+.pg-hero {
+  text-align: center;
+  padding: 54px 40px 36px;
+}
+.pg-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(180deg, #ff8c28 0%, #e86000 35%, #c85000 70%, #d96800 100%);
+  border-top: 1.5px solid rgba(255,210,140,.80);
+  border-left: 1.5px solid rgba(255,190,100,.60);
+  border-right: 1.5px solid rgba(120,40,0,.55);
+  border-bottom: 1.5px solid rgba(80,20,0,.70);
+  border-radius: 4px;
+  padding: 6px 20px 6px 14px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.90);
+  box-shadow: 0 3px 8px rgba(0,0,0,.40), 0 1px 0 rgba(255,220,150,.60) inset;
+  margin-bottom: 20px;
+}
+.pg-hero h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(34px, 5.5vw, 66px);
+  letter-spacing: 5px;
+  color: var(--gold);
+  line-height: 1.05;
+  margin-bottom: 14px;
+}
+.pg-hero-desc {
+  max-width: 700px;
+  margin: 0 auto;
+  color: #333;
+  font-size: 15px;
+  line-height: 1.75;
+  opacity: .88;
+}
+
+/* ── Service cards ── */
+.svc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 28px;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 40px 60px;
+}
+.svc-card {
+  background: rgba(255,255,255,.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border: 1.5px solid rgba(255,107,0,.25);
+  box-shadow: 0 6px 24px rgba(0,0,0,.09), 0 1px 0 rgba(255,255,255,.90) inset;
+  overflow: hidden;
+  transition: transform .22s, box-shadow .22s;
+}
+.svc-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 32px rgba(0,0,0,.14), 0 1px 0 rgba(255,255,255,.90) inset;
+}
+.svc-card-header {
+  background: linear-gradient(180deg, #ff8c28 0%, #e86000 35%, #c85000 70%, #d96800 100%);
+  padding: 18px 22px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 2px solid #8a3300;
+}
+.svc-card-header .svc-icon { font-size: 26px; flex-shrink: 0; }
+.svc-card-header h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 19px;
+  letter-spacing: 2.5px;
+  color: #fff;
+  line-height: 1.15;
+  text-shadow: 0 1px 2px rgba(0,0,0,.50);
+}
+.svc-card-body {
+  padding: 20px 22px 22px;
+}
+.svc-card-body p {
+  font-size: 13.5px;
+  color: #333;
+  line-height: 1.70;
+}
+.svc-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 14px;
+}
+.svc-tag {
+  background: rgba(255,107,0,.10);
+  border: 1px solid rgba(255,107,0,.30);
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 99px;
+}
+
+/* ── Licencia de Reconocimiento divider label ── */
+.section-label {
+  text-align: center;
+  padding: 10px 40px 0;
+}
+.section-label h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(28px, 4.5vw, 52px);
+  letter-spacing: 5px;
+  color: var(--gold);
+  margin-bottom: 10px;
+}
+.section-label p {
+  color: #444;
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  opacity: .80;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ── Two-column layout shared ── */
+.lc-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  max-width: 1000px;
+  margin: 36px auto 0;
+  padding: 0 40px 70px;
+  align-items: start;
+}
+
+/* ── Panel shared ── */
+.lc-panel, .lc-form-panel {
+  background: rgba(255,255,255,.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 8px;
+  border: 1.5px solid rgba(255,107,0,.28);
+  box-shadow: 0 6px 24px rgba(0,0,0,.10), 0 1px 0 rgba(255,255,255,.90) inset;
+  overflow: hidden;
+}
+.lc-panel-header {
+  background: linear-gradient(180deg, #ff8c28 0%, #e86000 35%, #c85000 70%, #d96800 100%);
+  padding: 15px 22px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 2px solid #8a3300;
+}
+.lc-panel-header h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px;
+  letter-spacing: 3px;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,.50);
+}
+.lc-panel-header .ph-icon { font-size: 19px; }
+
+/* ── Definition box inside panel ── */
+.lc-def-box {
+  padding: 16px 22px;
+  border-bottom: 1px solid rgba(255,107,0,.10);
+  background: rgba(255,107,0,.04);
+}
+.lc-def-box p {
+  font-size: 13px;
+  color: #333;
+  line-height: 1.68;
+}
+
+/* ── Doc list ── */
+.lc-doc-list { list-style: none; padding: 8px 0; }
+.lc-doc-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 11px 22px;
+  border-bottom: 1px solid rgba(255,107,0,.07);
+  transition: background .18s;
+}
+.lc-doc-list li:last-child { border-bottom: none; }
+.lc-doc-list li:hover { background: rgba(255,107,0,.04); }
+.doc-num {
+  min-width: 24px;
+  height: 24px;
+  background: linear-gradient(135deg, #ff8c28, #cc5500);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(200,85,0,.32);
+  margin-top: 2px;
+}
+.doc-text {
+  font-size: 13.5px;
+  color: #222;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+/* ── Upload form ── */
+.lc-upload-list { padding: 10px 22px 14px; }
+.lc-upload-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 4px;
+  border-bottom: 1px solid rgba(255,107,0,.09);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background .15s;
+}
+.lc-upload-item:last-child { border-bottom: none; }
+.lc-upload-item:hover { background: rgba(255,107,0,.05); }
+
+.lc-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 19px; height: 19px;
+  border: 2px solid var(--gold);
+  border-radius: 4px;
+  cursor: pointer;
+  flex-shrink: 0;
+  position: relative;
+  transition: background .18s;
+  background: rgba(255,255,255,.70);
+}
+.lc-checkbox:checked { background: var(--gold); }
+.lc-checkbox:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 900;
+  line-height: 1;
+}
+.lc-upload-label {
+  flex: 1;
+  font-size: 12.5px;
+  color: #222;
+  font-weight: 500;
+  line-height: 1.4;
+  cursor: pointer;
+  user-select: none;
+}
+.lc-file-wrapper { display: none; margin-left: 31px; margin-bottom: 8px; }
+.lc-file-input {
+  display: block; width: 100%;
+  font-size: 11.5px; color: #555;
+  background: rgba(255,107,0,.06);
+  border: 1.5px dashed rgba(255,107,0,.50);
+  border-radius: 5px;
+  padding: 7px 10px;
+  cursor: pointer;
+}
+.lc-file-input::-webkit-file-upload-button {
+  background: linear-gradient(180deg, #ff8c28 0%, #cc5500 100%);
+  color: #fff; border: none; border-radius: 3px;
+  padding: 4px 10px; font-size: 11px; font-weight: 700;
+  letter-spacing: 1px; cursor: pointer; margin-right: 6px;
+}
+
+.lc-progress-wrap {
+  padding: 14px 22px 18px;
+  background: rgba(255,107,0,.04);
+  border-top: 1px solid rgba(255,107,0,.12);
+}
+.lc-progress-label {
+  display: flex; justify-content: space-between;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 7px;
+}
+.lc-progress-bar {
+  height: 7px; background: rgba(255,107,0,.15);
+  border-radius: 99px; overflow: hidden;
+}
+.lc-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ff8c28, #cc5500);
+  border-radius: 99px;
+  transition: width .35s ease;
+  width: 0%;
+}
+
+.lc-btn-send {
+  display: block;
+  width: calc(100% - 44px);
+  margin: 0 22px 22px;
+  background: linear-gradient(180deg, #ff8c28 0%, #e86000 35%, #c85000 70%, #d96800 100%);
+  color: #fff; border: none;
+  border-top: 1.5px solid rgba(255,210,140,.80);
+  border-left: 1.5px solid rgba(255,190,100,.60);
+  border-right: 1.5px solid rgba(120,40,0,.55);
+  border-bottom: 1.5px solid rgba(80,20,0,.70);
+  padding: 14px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 18px; letter-spacing: 3px;
+  border-radius: 4px; cursor: pointer;
+  box-shadow: 0 1px 0 rgba(255,220,150,.70) inset, 0 4px 10px rgba(0,0,0,.35);
+  transition: transform .12s, box-shadow .12s;
+}
+.lc-btn-send:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 1px 0 rgba(255,230,160,.80) inset, 0 6px 14px rgba(0,0,0,.42);
+}
+.lc-btn-send:active { transform: translateY(0); }
+
+.lc-success {
+  display: none; text-align: center;
+  padding: 28px 22px 22px;
+  color: var(--gold);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px; letter-spacing: 2px;
+}
+.lc-success .success-icon { font-size: 44px; display: block; margin-bottom: 10px; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .svc-grid { grid-template-columns: 1fr; padding: 0 20px 50px; }
+  .lc-layout { grid-template-columns: 1fr; padding: 0 20px 50px; }
+  .pg-hero { padding: 36px 20px 24px; }
+  .section-label { padding: 10px 20px 0; }
+}
+</style>
 <body style="padding-top: 168px;">
 
 
@@ -1048,37 +1396,282 @@ footer {
 
 <div class="section-divider"></div>
 
-<!-- LICENCIAS -->
-<section id="licencias-pg4">
-  <div class="section-header">
-    <h2>Licencias y Servicios</h2>
-    <p>Consultoria de Proyectos </p>
+<main>
+
+  <!-- ══ PAGE HERO ══ -->
+  <div class="pg-hero">
+    <div class="pg-hero-badge">🏛️ &nbsp; Servicios Técnicos · Construmaster</div>
+    <h1>Servicios Técnicos<br>y Licencias</h1>
+    <p class="pg-hero-desc">
+      Ofrecemos soluciones integrales para la documentación, representación gráfica y
+      legalización de tu inmueble, desde el levantamiento en campo hasta la aprobación
+      final ante la Curaduría Urbana.
+    </p>
   </div>
 
-  <div class="cards-grid">
-    <a href="tramitelicenciaconstruccion.html" class="license-card" style="text-decoration: none; color: inherit;">
-      <div class="license-icon">🏗️</div>
-      <h3>Licencia de Construcción</h3>
-      <p>Tramite de licencia de construcción ante la Curaduría Urbana con todos los documentos requeridos.</p>
-    </a>
-    <div class="license-card">
-      <div class="license-icon">🔨</div>
-      <h3>Licencia de Remodelación</h3>
-      <p>Ampliaciones, reforzamientos y cambios de uso. Tramitamos permisos para transformar tu espacio.</p>
-    </div>
-    <div class="license-card">
-      <div class="license-icon">📐</div>
-      <h3>Diseño Arquitectónico</h3>
-      <p>Planos arquitectónicos, estructurales e hidráulicos con cumplimiento de normas NSR-10 y POT.</p>
-    </div>
-    <a href="licenciareconocimiento.html" class="license-card" style="text-decoration: none; color: inherit;">
-      <div class="license-icon">🏢</div>
-      <h3>Licencia de Reconocimiento</h3>
-      <p>Estudios de factibilidad, Levantamiento de planos, gestión ante curaduría y planeación municipal.</p>
-    </a>
-  </div>
-</section>
+  <!-- ══ SERVICIOS CARDS ══ -->
+  <div class="svc-grid">
 
+    <!-- Levantamiento Arquitectónico -->
+    <div class="svc-card">
+      <div class="svc-card-header">
+        <span class="svc-icon">📐</span>
+        <h3>Levantamiento Arquitectónico de Planos del Inmueble</h3>
+      </div>
+      <div class="svc-card-body">
+        <p>
+          Realizamos visitas técnicas al predio para tomar medidas, verificar dimensiones
+          y recopilar toda la información física de la construcción existente, con el fin
+          de elaborar el modelo arquitectónico y el juego de planos del inmueble.
+        </p>
+        <div class="svc-tags">
+          <span class="svc-tag">Visita técnica</span>
+          <span class="svc-tag">Medición en campo</span>
+          <span class="svc-tag">Planos As-Built</span>
+          <span class="svc-tag">Documentación física</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Virtualización y Desarrollo Gráfico -->
+    <div class="svc-card">
+      <div class="svc-card-header">
+        <span class="svc-icon">🖥️</span>
+        <h3>Virtualización y Desarrollo Gráfico</h3>
+      </div>
+      <div class="svc-card-body">
+        <p>
+          Virtualización de planos, modelado 3D, metodología BIM y desarrollo gráfico
+          de proyectos arquitectónicos para representación técnica, presentación visual
+          y documentación digital del proyecto.
+        </p>
+        <div class="svc-tags">
+          <span class="svc-tag">Modelado 3D</span>
+          <span class="svc-tag">Metodología BIM</span>
+          <span class="svc-tag">Render</span>
+          <span class="svc-tag">Documentación digital</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- ══ LICENCIA DE RECONOCIMIENTO ══ -->
+  <div class="section-label" style="padding-top:52px;">
+    <h2>Licencia de Reconocimiento</h2>
+    <p>Trámite ante Curaduría Urbana para legalizar edificaciones construidas sin licencia</p>
+  </div>
+
+  <div class="lc-layout">
+
+    <!-- Documentos requeridos -->
+    <div class="lc-panel">
+      <div class="lc-panel-header">
+        <span class="ph-icon">📋</span>
+        <h3>Definición y Documentos</h3>
+      </div>
+      <div class="lc-def-box">
+        <p>
+          Trámite ante la Curaduría Urbana o autoridad competente para reconocer legalmente
+          una edificación construida sin licencia, siempre que cumpla con las normas
+          urbanísticas y de seguridad vigentes.
+        </p>
+      </div>
+      <ul class="lc-doc-list">
+        <li><span class="doc-num">1</span><span class="doc-text">Escritura del predio</span></li>
+        <li><span class="doc-num">2</span><span class="doc-text">Impuesto predial vigente</span></li>
+        <li><span class="doc-num">3</span><span class="doc-text">Certificado de libertad y tradición</span></li>
+        <li><span class="doc-num">4</span><span class="doc-text">Documento de identidad del propietario</span></li>
+        <li><span class="doc-num">5</span><span class="doc-text">Levantamiento arquitectónico de la edificación existente</span></li>
+        <li><span class="doc-num">6</span><span class="doc-text">Planos arquitectónicos del estado actual</span></li>
+        <li><span class="doc-num">7</span><span class="doc-text">Peritaje estructural o concepto estructural</span></li>
+        <li><span class="doc-num">8</span><span class="doc-text">Fotografías de la edificación</span></li>
+        <li><span class="doc-num">9</span><span class="doc-text">Formulario único nacional diligenciado</span></li>
+        <li><span class="doc-num">10</span><span class="doc-text">Matrícula profesional de arquitecto e ingeniero</span></li>
+      </ul>
+    </div>
+
+    <!-- Formulario adjuntar documentos -->
+    <div class="lc-form-panel">
+      <div class="lc-panel-header">
+        <span class="ph-icon">📎</span>
+        <h3>Adjuntar Documentos</h3>
+      </div>
+
+      <div id="uploadArea">
+        <div class="lc-upload-list">
+
+          <div class="lc-upload-item" onclick="toggleUpload(1)">
+            <input type="checkbox" class="lc-checkbox" id="chk1" onclick="event.stopPropagation(); handleCheck(1)">
+            <label class="lc-upload-label" for="chk1">1. Escritura del predio</label>
+            <span style="font-size:17px;color:var(--gold)" id="arrow1">＋</span>
+          </div>
+          <div class="lc-file-wrapper" id="fw1">
+            <input type="file" class="lc-file-input" id="file1" accept=".pdf,.jpg,.png" onchange="fileSelected(1)">
+          </div>
+
+          <div class="lc-upload-item" onclick="toggleUpload(2)">
+            <input type="checkbox" class="lc-checkbox" id="chk2" onclick="event.stopPropagation(); handleCheck(2)">
+            <label class="lc-upload-label" for="chk2">2. Impuesto predial</label>
+            <span style="font-size:17px;color:var(--gold)" id="arrow2">＋</span>
+          </div>
+          <div class="lc-file-wrapper" id="fw2">
+            <input type="file" class="lc-file-input" id="file2" accept=".pdf,.jpg,.png" onchange="fileSelected(2)">
+          </div>
+
+          <div class="lc-upload-item" onclick="toggleUpload(3)">
+            <input type="checkbox" class="lc-checkbox" id="chk3" onclick="event.stopPropagation(); handleCheck(3)">
+            <label class="lc-upload-label" for="chk3">3. Certificado de libertad y tradición</label>
+            <span style="font-size:17px;color:var(--gold)" id="arrow3">＋</span>
+          </div>
+          <div class="lc-file-wrapper" id="fw3">
+            <input type="file" class="lc-file-input" id="file3" accept=".pdf,.jpg,.png" onchange="fileSelected(3)">
+          </div>
+
+          <div class="lc-upload-item" onclick="toggleUpload(4)">
+            <input type="checkbox" class="lc-checkbox" id="chk4" onclick="event.stopPropagation(); handleCheck(4)">
+            <label class="lc-upload-label" for="chk4">4. Documento de identidad del propietario</label>
+            <span style="font-size:17px;color:var(--gold)" id="arrow4">＋</span>
+          </div>
+          <div class="lc-file-wrapper" id="fw4">
+            <input type="file" class="lc-file-input" id="file4" accept=".pdf,.jpg,.png" onchange="fileSelected(4)">
+          </div>
+
+          <div class="lc-upload-item" onclick="toggleUpload(5)">
+            <input type="checkbox" class="lc-checkbox" id="chk5" onclick="event.stopPropagation(); handleCheck(5)">
+            <label class="lc-upload-label" for="chk5">5. Levantamiento arquitectónico existente</label>
+            <span style="font-size:17px;color:var(--gold)" id="arrow5">＋</span>
+          </div>
+          <div class="lc-file-wrapper" id="fw5">
+            <input type="file" class="lc-file-input" id="file5" accept=".pdf,.dwg,.jpg,.png" onchange="fileSelected(5)">
+          </div>
+
+          <div class="lc-upload-item" onclick="toggleUpload(6)">
+            <input type="checkbox" class="lc-checkbox" id="chk6" onclick="event.stopPropagation(); handleCheck(6)">
+            <label class="lc-upload-label" for="chk6">6. Planos arquitectónicos estado actual</label>
+            <span style="font-size:17px;color:var(--gold)" id="arrow6">＋</span>
+          </div>
+          <div class="lc-file-wrapper" id="fw6">
+            <input type="file" class="lc-file-input" id="file6" accept=".pdf,.dwg,.jpg,.png" onchange="fileSelected(6)">
+          </div>
+
+          <div class="lc-upload-item" onclick="toggleUpload(7)">
+            <input type="checkbox" class="lc-checkbox" id="chk7" onclick="event.stopPropagation(); handleCheck(7)">
+            <label class="lc-upload-label" for="chk7">7. Peritaje o concepto estructural</label>
+            <span style="font-size:17px;color:var(--gold)" id="arrow7">＋</span>
+          </div>
+          <div class="lc-file-wrapper" id="fw7">
+            <input type="file" class="lc-file-input" id="file7" accept=".pdf,.doc,.docx" onchange="fileSelected(7)">
+          </div>
+
+          <div class="lc-upload-item" onclick="toggleUpload(8)">
+            <input type="checkbox" class="lc-checkbox" id="chk8" onclick="event.stopPropagation(); handleCheck(8)">
+            <label class="lc-upload-label" for="chk8">8. Fotografías de la edificación</label>
+            <span style="font-size:17px;color:var(--gold)" id="arrow8">＋</span>
+          </div>
+          <div class="lc-file-wrapper" id="fw8">
+            <input type="file" class="lc-file-input" id="file8" accept=".jpg,.jpeg,.png,.heic" multiple onchange="fileSelected(8)">
+          </div>
+
+          <div class="lc-upload-item" onclick="toggleUpload(9)">
+            <input type="checkbox" class="lc-checkbox" id="chk9" onclick="event.stopPropagation(); handleCheck(9)">
+            <label class="lc-upload-label" for="chk9">9. Formulario único nacional diligenciado</label>
+            <span style="font-size:17px;color:var(--gold)" id="arrow9">＋</span>
+          </div>
+          <div class="lc-file-wrapper" id="fw9">
+            <input type="file" class="lc-file-input" id="file9" accept=".pdf,.jpg,.png" onchange="fileSelected(9)">
+          </div>
+
+          <div class="lc-upload-item" onclick="toggleUpload(10)">
+            <input type="checkbox" class="lc-checkbox" id="chk10" onclick="event.stopPropagation(); handleCheck(10)">
+            <label class="lc-upload-label" for="chk10">10. Matrícula profesional arquitecto e ingeniero</label>
+            <span style="font-size:17px;color:var(--gold)" id="arrow10">＋</span>
+          </div>
+          <div class="lc-file-wrapper" id="fw10">
+            <input type="file" class="lc-file-input" id="file10" accept=".pdf,.jpg,.png" onchange="fileSelected(10)">
+          </div>
+
+        </div>
+
+        <div class="lc-progress-wrap">
+          <div class="lc-progress-label">
+            <span>Documentos adjuntados</span>
+            <span id="progressText">0 / 10</span>
+          </div>
+          <div class="lc-progress-bar">
+            <div class="lc-progress-fill" id="progressFill"></div>
+          </div>
+        </div>
+
+        <button class="lc-btn-send" onclick="enviarDocumentos()">📲 &nbsp; Enviar por WhatsApp</button>
+      </div>
+
+      <div class="lc-success" id="uploadSuccess">
+        <span class="success-icon">✅</span>
+        ¡Documentos enviados!<br>
+        <span style="font-size:13px;font-family:'Barlow',sans-serif;font-weight:400;letter-spacing:1px;color:#555;">
+          Te contactaremos pronto para continuar con tu trámite.
+        </span>
+      </div>
+
+    </div>
+  </div><!-- /lc-layout -->
+
+</main>
+
+<script>
+const TOTAL = 10;
+let checkedCount = 0;
+let openRow = null;
+
+function toggleUpload(n) {
+  const fw    = document.getElementById('fw' + n);
+  const arrow = document.getElementById('arrow' + n);
+  if (openRow && openRow !== n) {
+    document.getElementById('fw' + openRow).style.display = 'none';
+    document.getElementById('arrow' + openRow).textContent = '＋';
+  }
+  const isOpen = fw.style.display === 'block';
+  fw.style.display  = isOpen ? 'none' : 'block';
+  arrow.textContent = isOpen ? '＋' : '－';
+  openRow = isOpen ? null : n;
+}
+
+function fileSelected(n) {
+  const file = document.getElementById('file' + n).files[0];
+  if (!file) return;
+  const chk = document.getElementById('chk' + n);
+  if (!chk.checked) { chk.checked = true; checkedCount++; updateProgress(); }
+}
+
+function handleCheck(n) {
+  checkedCount += document.getElementById('chk' + n).checked ? 1 : -1;
+  updateProgress();
+}
+
+function updateProgress() {
+  const pct = Math.max(0, Math.min(100, (checkedCount / TOTAL) * 100));
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = checkedCount + ' / ' + TOTAL;
+}
+
+function enviarDocumentos() {
+  const listos = [], pendientes = [];
+  for (let i = 1; i <= TOTAL; i++) {
+    const lbl = document.getElementById('chk' + i).nextElementSibling.textContent;
+    (document.getElementById('chk' + i).checked ? listos : pendientes).push(lbl);
+  }
+  let msg = '🏛️ *LICENCIA DE RECONOCIMIENTO — Construmaster*\n\n';
+  if (listos.length)     msg += '*Documentos listos:*\n'    + listos.map(l => '✅ ' + l).join('\n') + '\n\n';
+  if (pendientes.length) msg += '*Documentos pendientes:*\n' + pendientes.map(l => '⏳ ' + l).join('\n') + '\n\n';
+  msg += '_Solicito información sobre el trámite de Licencia de Reconocimiento._';
+  window.open('https://wa.me/573133954816?text=' + encodeURIComponent(msg), '_blank');
+  document.getElementById('uploadArea').style.display   = 'none';
+  document.getElementById('uploadSuccess').style.display = 'block';
+}
+</script>
 <div class="section-divider"></div>
 
 <!-- FOOTER -->
