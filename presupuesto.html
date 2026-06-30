@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presupuesto APU - COMFER</title>
+    <link rel="stylesheet" href="css/comfer.css">
+    <style>
+        html, body { height: 100%; overflow: hidden; }
+
+        /* Full-screen APU container positioned below nav */
+        .apu-shell {
+            position: fixed;
+            top: 71px;
+            left: 0;
+            right: 0;
+            bottom: 48px;
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* ── LEFT PANEL ── */
+        .apu-left {
+            width: 348px;
+            min-width: 348px;
+            display: flex;
+            background: #fff;
+            border-right: 2px solid #e0e0e0;
+            overflow: hidden;
+        }
+
+        .apu-phases {
+            width: 30px;
+            min-width: 30px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .apu-phase {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 8.5px;
+            font-weight: 800;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            writing-mode: vertical-lr;
+            transform: rotate(180deg);
+        }
+        .apu-phase.negra  { background: #3b1a0a; flex: 3; }
+        .apu-phase.gris   { background: #2a2a2a; flex: 5; }
+        .apu-phase.blanca { background: #0d1f3c; flex: 5; }
+
+        .apu-chapters {
+            flex: 1;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #ccc #f5f5f5;
+        }
+        .apu-chapters::-webkit-scrollbar { width: 4px; }
+        .apu-chapters::-webkit-scrollbar-thumb { background: #ccc; border-radius: 2px; }
+
+        .apu-chap-header {
+            background: #c0392b;
+            color: #fff;
+            font-size: 10.5px;
+            font-weight: 900;
+            padding: 9px 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            position: sticky;
+            top: 0;
+            z-index: 3;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .apu-chap-row {
+            display: flex;
+            align-items: center;
+            padding: 7px 10px 7px 12px;
+            border-bottom: 1px solid #f0f0f0;
+            gap: 7px;
+            cursor: pointer;
+            transition: background 0.14s;
+        }
+        .apu-chap-row:hover  { background: #f4f6ff; }
+        .apu-chap-row.active { background: #e8efff; border-left: 3px solid #1a4fff; padding-left: 9px; }
+
+        .apu-chap-num  { font-size: 11px; font-weight: 700; color: #999; min-width: 18px; }
+        .apu-chap-name { flex: 1; font-size: 11.5px; color: #222; line-height: 1.3; }
+        .apu-chap-val  { font-size: 10.5px; font-weight: 700; color: #555; text-align: right; white-space: nowrap; }
+
+        .btn-detalle {
+            background: #1a4fff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            padding: 3px 9px;
+            font-size: 9.5px;
+            font-weight: 800;
+            cursor: pointer;
+            letter-spacing: 0.4px;
+            white-space: nowrap;
+            transition: background 0.14s;
+        }
+        .btn-detalle:hover { background: #0033cc; }
+
+        /* ── RIGHT PANEL ── */
+        .apu-right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            background: #f2f2f2;
+        }
+
+        /* 3-D building */
+        .apu-building {
+            flex: 0 0 230px;
+            background: #0c1021;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .apu-building-label {
+            position: absolute;
+            top: 10px; left: 14px;
+            color: rgba(255,255,255,0.4);
+            font-size: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .apu-chapter-name-overlay {
+            position: absolute;
+            top: 10px; right: 14px;
+            background: rgba(26,79,255,0.75);
+            color: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 3px;
+            letter-spacing: 0.5px;
+        }
+
+        /* APU table area */
+        .apu-detail {
+            flex: 1;
+            overflow-y: auto;
+            background: #fff;
+            scrollbar-width: thin;
+            scrollbar-color: #ccc #f9f9f9;
+        }
+        .apu-detail::-webkit-scrollbar { width: 6px; }
+        .apu-detail::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
+
+        .apu-detail-bar {
+            position: sticky;
+            top: 0;
+            z-index: 2;
+            background: #1a1a2e;
+            color: #fff;
+            padding: 9px 14px;
+            font-size: 12px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .apu-cap-badge {
+            background: #1a4fff;
+            color: #fff;
+            font-size: 10px;
+            padding: 2px 9px;
+            border-radius: 3px;
+            font-weight: 800;
+        }
+        .apu-total-badge {
+            margin-left: auto;
+            background: rgba(26,79,255,0.25);
+            border: 1px solid rgba(26,79,255,0.5);
+            color: #a0b8ff;
+            font-size: 11px;
+            padding: 2px 12px;
+            border-radius: 3px;
+        }
+
+        .apu-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 11.5px;
+        }
+        .apu-table thead tr { background: #ebebeb; }
+        .apu-table th {
+            padding: 6px 10px;
+            font-size: 9.5px;
+            font-weight: 800;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            border: 1px solid #ddd;
+            white-space: nowrap;
+            text-align: center;
+        }
+        .apu-table th.al { text-align: left; }
+        .apu-table td {
+            padding: 6px 10px;
+            border: 1px solid #eee;
+            color: #333;
+            vertical-align: middle;
+        }
+        tr.r-sub  td { background: #eef2ff; font-weight: 700; color: #1a1a2e; }
+        tr.r-mat  td { background: #fff; }
+        tr.r-mat:hover td { background: #fafbff; }
+        tr.r-tot  td { background: #dce8ff; font-weight: 700; color: #0033cc; font-size: 12px; }
+
+        td.ar { text-align: right; }
+        td.ac { text-align: center; }
+        .col-ref { width: 52px; }
+        .col-item { min-width: 140px; }
+        .col-sub  { min-width: 180px; }
+        .col-und  { width: 68px; }
+        .col-qty  { width: 82px; }
+        .col-vu   { width: 100px; }
+        .col-vt   { width: 110px; font-weight: 600; }
+
+        /* ── STICKY TAB BAR ── */
+        .apu-tabs {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            height: 48px;
+            background: #12122a;
+            border-top: 2px solid #1a4fff;
+            display: flex;
+            overflow-x: auto;
+            overflow-y: hidden;
+            z-index: 200;
+            scrollbar-width: none;
+        }
+        .apu-tabs::-webkit-scrollbar { display: none; }
+
+        .apu-tab {
+            flex: 0 0 auto;
+            height: 48px;
+            padding: 0 14px;
+            display: flex;
+            align-items: center;
+            color: rgba(255,255,255,0.55);
+            font-size: 10.5px;
+            font-weight: 600;
+            white-space: nowrap;
+            cursor: pointer;
+            border-right: 1px solid rgba(255,255,255,0.07);
+            transition: background 0.14s, color 0.14s;
+        }
+        .apu-tab:hover  { background: rgba(26,79,255,0.18); color: #fff; }
+        .apu-tab.active { background: #1a4fff; color: #fff; font-weight: 800; }
+    </style>
+</head>
+<body>
+    <script src="js/nav.js"></script>
+
+    <div class="apu-shell">
+
+        <!-- ═══════════ LEFT: Chapters ═══════════ -->
+        <div class="apu-left">
+            <div class="apu-phases">
+                <div class="apu-phase negra">OBRA NEGRA&nbsp;&nbsp;ETAPA 1</div>
+                <div class="apu-phase gris">OBRA GRIS&nbsp;&nbsp;ETAPA 2</div>
+                <div class="apu-phase blanca">OBRA BLANCA&nbsp;&nbsp;ETAPA 3</div>
+            </div>
+            <div class="apu-chapters">
+                <div class="apu-chap-header">
+                    <span>CAP&Iacute;TULO</span>
+                    <span>TOTAL</span>
+                </div>
+                <div id="chapList"></div>
+            </div>
+        </div>
+
+        <!-- ═══════════ RIGHT: Building + APU ═══════════ -->
+        <div class="apu-right">
+
+            <!-- 3-D building visual -->
+            <div class="apu-building">
+                <span class="apu-building-label">Visualizaci&oacute;n 3D del Proyecto</span>
+                <span class="apu-chapter-name-overlay" id="buildingChapName">Cap. 2 &mdash; Estructura en concreto</span>
+                <svg width="560" height="210" viewBox="0 0 560 210" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <radialGradient id="gWin" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" stop-color="#4a8fd9" stop-opacity="0.35"/>
+                            <stop offset="100%" stop-color="#4a8fd9" stop-opacity="0"/>
+                        </radialGradient>
+                        <filter id="glow">
+                            <feGaussianBlur stdDeviation="2.5" result="blur"/>
+                            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                        </filter>
+                    </defs>
+
+                    <!-- Ground shadow -->
+                    <ellipse cx="270" cy="194" rx="210" ry="11" fill="rgba(0,0,0,0.45)"/>
+
+                    <!-- Annex / garage left -->
+                    <polygon points="58,162 125,162 125,112 58,112" fill="#223250" stroke="#3a5488" stroke-width="0.8"/>
+                    <polygon points="125,162 158,148 158,98 125,112" fill="#19283d" stroke="#3a5488" stroke-width="0.8"/>
+                    <polygon points="58,112 125,112 158,98 91,98" fill="#2b406a" stroke="#4a6aaa" stroke-width="0.8"/>
+                    <rect x="68" y="124" width="34" height="22" rx="2" fill="#3a7fc0" stroke="#60a8e8" stroke-width="0.8" opacity="0.85"/>
+                    <line x1="85" y1="124" x2="85" y2="146" stroke="#60a8e8" stroke-width="0.7" opacity="0.6"/>
+                    <line x1="68" y1="135" x2="102" y2="135" stroke="#60a8e8" stroke-width="0.7" opacity="0.6"/>
+
+                    <!-- Main body -->
+                    <polygon points="125,162 358,162 358,78 125,78" fill="#253c68" stroke="#3a5a9a" stroke-width="1"/>
+                    <polygon points="358,162 442,130 442,46 358,78" fill="#1a2d50" stroke="#3a5a9a" stroke-width="1"/>
+                    <polygon points="125,78 358,78 442,46 208,46" fill="#2e4a80" stroke="#4a6aaa" stroke-width="1"/>
+
+                    <!-- Roof ridge -->
+                    <line x1="125" y1="78" x2="358" y2="78" stroke="#506ab0" stroke-width="1.5"/>
+                    <line x1="358" y1="78" x2="442" y2="46" stroke="#506ab0" stroke-width="1.5"/>
+                    <line x1="125" y1="78" x2="208" y2="46" stroke="#506ab0" stroke-width="1.2" stroke-dasharray="4,3"/>
+
+                    <!-- Windows front -->
+                    <rect x="142" y="100" width="50" height="34" rx="2" fill="#3a7fc0" stroke="#60a8e8" stroke-width="0.8" opacity="0.9"/>
+                    <line x1="167" y1="100" x2="167" y2="134" stroke="#60a8e8" stroke-width="0.7" opacity="0.5"/>
+                    <line x1="142" y1="117" x2="192" y2="117" stroke="#60a8e8" stroke-width="0.7" opacity="0.5"/>
+                    <rect x="142" y="100" width="50" height="34" rx="2" fill="url(#gWin)"/>
+
+                    <rect x="210" y="100" width="50" height="34" rx="2" fill="#3a7fc0" stroke="#60a8e8" stroke-width="0.8" opacity="0.9"/>
+                    <line x1="235" y1="100" x2="235" y2="134" stroke="#60a8e8" stroke-width="0.7" opacity="0.5"/>
+                    <line x1="210" y1="117" x2="260" y2="117" stroke="#60a8e8" stroke-width="0.7" opacity="0.5"/>
+                    <rect x="210" y="100" width="50" height="34" rx="2" fill="url(#gWin)"/>
+
+                    <!-- Door -->
+                    <rect x="288" y="118" width="52" height="44" rx="2" fill="#0d1a35" stroke="#3a5a8a" stroke-width="1"/>
+                    <rect x="288" y="118" width="25" height="44" rx="2" fill="#162040"/>
+                    <circle cx="312" cy="141" r="2.5" fill="#c0a060" filter="url(#glow)"/>
+
+                    <!-- Right-face window -->
+                    <rect x="370" y="92" width="40" height="26" rx="2" fill="#3a7fc0" stroke="#60a8e8" stroke-width="0.8" opacity="0.8"/>
+
+                    <!-- Base / plinth -->
+                    <polygon points="105,162 125,162 125,170 105,170" fill="#1a2840"/>
+                    <polygon points="125,162 358,162 358,170 125,170" fill="#1c2e58"/>
+                    <polygon points="358,162 442,130 442,138 358,170" fill="#16223a"/>
+
+                    <!-- Ground line -->
+                    <line x1="90" y1="162" x2="455" y2="162" stroke="#3a5080" stroke-width="1"/>
+
+                    <!-- Trees -->
+                    <line x1="468" y1="162" x2="468" y2="124" stroke="#2e5030" stroke-width="2"/>
+                    <ellipse cx="468" cy="114" rx="15" ry="17" fill="#1e4020"/>
+                    <ellipse cx="468" cy="107" rx="11" ry="13" fill="#285530"/>
+
+                    <line x1="490" y1="162" x2="490" y2="136" stroke="#2e5030" stroke-width="2"/>
+                    <ellipse cx="490" cy="127" rx="12" ry="14" fill="#1e4020"/>
+                    <ellipse cx="490" cy="120" rx="9" ry="11" fill="#285530"/>
+
+                    <line x1="510" y1="162" x2="510" y2="146" stroke="#2e5030" stroke-width="1.5"/>
+                    <ellipse cx="510" cy="138" rx="9" ry="10" fill="#1e4020"/>
+
+                    <!-- Walkway -->
+                    <polygon points="195,170 268,170 260,185 203,185" fill="#18223a" stroke="#28324a" stroke-width="0.8"/>
+
+                    <!-- Stars -->
+                    <circle cx="88"  cy="18" r="1"   fill="rgba(255,255,255,0.4)"/>
+                    <circle cx="155" cy="12" r="0.8" fill="rgba(255,255,255,0.3)"/>
+                    <circle cx="220" cy="22" r="1"   fill="rgba(255,255,255,0.4)"/>
+                    <circle cx="300" cy="15" r="0.8" fill="rgba(255,255,255,0.3)"/>
+                    <circle cx="370" cy="10" r="1"   fill="rgba(255,255,255,0.4)"/>
+                    <circle cx="430" cy="20" r="0.8" fill="rgba(255,255,255,0.3)"/>
+                    <circle cx="510" cy="14" r="1"   fill="rgba(255,255,255,0.4)"/>
+                    <circle cx="542" cy="28" r="0.8" fill="rgba(255,255,255,0.3)"/>
+
+                    <!-- Moon -->
+                    <circle cx="536" cy="22" r="13" fill="#d4c870" opacity="0.7"/>
+                    <circle cx="542" cy="19" r="10" fill="#0c1021"/>
+                </svg>
+            </div>
+
+            <!-- APU detail -->
+            <div class="apu-detail">
+                <div class="apu-detail-bar">
+                    <span class="apu-cap-badge" id="detBadge">Cap. 2</span>
+                    <span id="detTitle">Estructura en concreto</span>
+                    <span class="apu-total-badge" id="detTotal"></span>
+                </div>
+                <table class="apu-table">
+                    <thead>
+                        <tr>
+                            <th class="col-ref al">REF</th>
+                            <th class="col-item al">&Iacute;TEM</th>
+                            <th class="col-sub al">SUB-&Iacute;TEM / INSUMO</th>
+                            <th class="col-und">UNIDAD</th>
+                            <th class="col-qty">UND TOTAL</th>
+                            <th class="col-vu">VALOR U.</th>
+                            <th class="col-vt">VALOR TOTAL</th>
+                        </tr>
+                    </thead>
+                    <tbody id="apuBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab bar -->
+    <div class="apu-tabs" id="apuTabs"></div>
+
+    <script src="js/cart.js"></script>
+    <script>
+    (function () {
+        var CHAPTERS = [
+            { id:1,  name:'Preliminares',                 phase:'negra',
+              items:[
+                { ref:'1.1', item:'Cerramiento provisional', subs:[
+                    {mat:'Tabla burra 1"x10"x3m',        und:'ml',    qty:45,   vu:12000  },
+                    {mat:'Polisombra verde 2m',            und:'ml',    qty:45,   vu:3200   },
+                    {mat:'Puntilla 2"',                   und:'kg',    qty:3,    vu:8500   }
+                ]},
+                { ref:'1.2', item:'Descapote manual e:20cm', subs:[
+                    {mat:'Mano de obra',                  und:'m²',qty:80,   vu:4500   },
+                    {mat:'Retiro en volqueta',            und:'viaje', qty:2,    vu:180000 }
+                ]},
+                { ref:'1.3', item:'Localización y replanteo', subs:[
+                    {mat:'Estacas de madera',             und:'und',   qty:20,   vu:1500   },
+                    {mat:'Topógrafo (4h)',           und:'hora',  qty:4,    vu:55000  },
+                    {mat:'Cabuya / hilo',                 und:'rollo', qty:2,    vu:4000   }
+                ]}
+              ]
+            },
+            { id:2,  name:'Estructura en concreto',       phase:'negra',
+              items:[
+                { ref:'2.1', item:'Vigas de cimentación h:.25m', subs:[
+                    {mat:"Concreto f'c=21MPa",            und:'M³',qty:2.16, vu:700000 },
+                    {mat:'Acero Fy=420MPa',               und:'KG',    qty:218,  vu:4400   },
+                    {mat:'Formaleta madera',              und:'m²',qty:14,   vu:18000  }
+                ]},
+                { ref:'2.2', item:'Placa de contrapiso e:10cm', subs:[
+                    {mat:"Concreto f'c=21MPa",            und:'M³',qty:8,    vu:700000 },
+                    {mat:'Malla electrosoldada 15×15',und:'m²',qty:80,   vu:18500  },
+                    {mat:'Polietileno 6 mil',             und:'m²',qty:85,   vu:2800   }
+                ]},
+                { ref:'2.3', item:'Columnas 30×30 cm', subs:[
+                    {mat:"Concreto f'c=28MPa",            und:'M³',qty:1.8,  vu:780000 },
+                    {mat:'Acero longitudinal',            und:'KG',    qty:185,  vu:4400   },
+                    {mat:'Estribo Ø3/8"',            und:'KG',    qty:45,   vu:4200   },
+                    {mat:'Formaleta metálica',       und:'m²',qty:22,   vu:14000  }
+                ]},
+                { ref:'2.4', item:'Viga aérea 25×35 cm', subs:[
+                    {mat:"Concreto f'c=28MPa",            und:'M³',qty:2.4,  vu:780000 },
+                    {mat:'Acero longitudinal',            und:'KG',    qty:320,  vu:4400   },
+                    {mat:'Estribo Ø3/8"',            und:'KG',    qty:68,   vu:4200   }
+                ]}
+              ]
+            },
+            { id:3,  name:'Hidrosanitario',               phase:'negra',
+              items:[
+                { ref:'3.1', item:'Red suministro PVC-P', subs:[
+                    {mat:'Tubo PVC-P 1/2"×6m',       und:'ml',    qty:35,   vu:12500  },
+                    {mat:'Tubo PVC-P 3/4"×6m',       und:'ml',    qty:18,   vu:16800  },
+                    {mat:'Codos, tees, uniones',          und:'gbl',   qty:1,    vu:85000  }
+                ]},
+                { ref:'3.2', item:'Red aguas residuales PVC-S', subs:[
+                    {mat:'Tubo PVC-S 4"×6m',         und:'ml',    qty:28,   vu:38000  },
+                    {mat:'Tubo PVC-S 2"×6m',         und:'ml',    qty:15,   vu:18500  },
+                    {mat:'Cámara inspección 60×60',und:'und',qty:2,vu:320000}
+                ]}
+              ]
+            },
+            { id:4,  name:'Mampostería',                  phase:'gris',
+              items:[
+                { ref:'4.1', item:'Muro ladrillo e:12cm', subs:[
+                    {mat:'Ladrillo Farol No.5',           und:'und',   qty:1850, vu:890    },
+                    {mat:'Mortero 1:4',                   und:'m³',qty:0.9,  vu:420000 },
+                    {mat:'Mano de obra',                  und:'m²',qty:95,   vu:18000  }
+                ]},
+                { ref:'4.2', item:'Dintel prefabricado', subs:[
+                    {mat:'Dintel 10×15×1.2m',   und:'und',   qty:8,    vu:35000  },
+                    {mat:'Mortero de asiento',            und:'kg',    qty:40,   vu:350    }
+                ]}
+              ]
+            },
+            { id:5,  name:'Pañetes bordes y filos',  phase:'gris',
+              items:[
+                { ref:'5.1', item:'Pañete liso 1:3 muros int.', subs:[
+                    {mat:'Cemento Portland 50kg',         und:'und',   qty:22,   vu:34900  },
+                    {mat:'Arena de río lavada',       und:'m³',qty:1.8,  vu:95000  },
+                    {mat:'Mano de obra pañete',       und:'m²',qty:160,  vu:12000  }
+                ]},
+                { ref:'5.2', item:'Bordes y filos cielo raso', subs:[
+                    {mat:'Mano de obra',                  und:'ml',    qty:120,  vu:4500   },
+                    {mat:'Mortero premezclado',           und:'kg',    qty:80,   vu:420    }
+                ]}
+              ]
+            },
+            { id:6,  name:'Carpintería Metálica', phase:'gris',
+              items:[
+                { ref:'6.1', item:'Puerta metálica 0.9×2.1m', subs:[
+                    {mat:'Puerta lam. cold-roll',         und:'und',   qty:1,    vu:850000 },
+                    {mat:'Cerradura seguridad',           und:'und',   qty:1,    vu:145000 }
+                ]},
+                { ref:'6.2', item:'Ventana aluminio nat. corr.', subs:[
+                    {mat:'Ventana 1.2×1.0m',         und:'und',   qty:4,    vu:380000 },
+                    {mat:'Ventana 0.6×0.8m',         und:'und',   qty:3,    vu:210000 },
+                    {mat:'Silicona sellante',             und:'cart.',  qty:6,    vu:18000  }
+                ]}
+              ]
+            },
+            { id:7,  name:'Vidrios y ventanas',           phase:'gris',
+              items:[
+                { ref:'7.1', item:'Vidrio flotado 4mm', subs:[
+                    {mat:'Vidrio flotado 4mm',            und:'m²',qty:12.5, vu:45000  },
+                    {mat:'Instalación',              und:'m²',qty:12.5, vu:18000  }
+                ]},
+                { ref:'7.2', item:'Vidrio laminar seguridad', subs:[
+                    {mat:'Vidrio laminar 6mm',            und:'m²',qty:4.2,  vu:120000 },
+                    {mat:'Instalación',              und:'m²',qty:4.2,  vu:22000  }
+                ]}
+              ]
+            },
+            { id:8,  name:'Estucado y pintura de muros',  phase:'gris',
+              items:[
+                { ref:'8.1', item:'Estuco plástico muros int.', subs:[
+                    {mat:'Estuco Sika 25kg',              und:'und',   qty:18,   vu:38000  },
+                    {mat:'Mano de obra',                  und:'m²',qty:160,  vu:8500   }
+                ]},
+                { ref:'8.2', item:'Pintura caucho 2 manos', subs:[
+                    {mat:'Pintura Pintuco 4gal',          und:'und',   qty:8,    vu:89900  },
+                    {mat:'Mano de obra',                  und:'m²',qty:160,  vu:5500   }
+                ]}
+              ]
+            },
+            { id:9,  name:'Techo en drywall',             phase:'blanca',
+              items:[
+                { ref:'9.1', item:'Cielo raso drywall 1/2"', subs:[
+                    {mat:'Placa drywall 1/2"',            und:'m²',qty:75,   vu:22000  },
+                    {mat:'Perilería galv.',           und:'m²',qty:75,   vu:14000  },
+                    {mat:'Tornillos y masilla',           und:'m²',qty:75,   vu:4500   }
+                ]}
+              ]
+            },
+            { id:10, name:'Pisos y enchapes',             phase:'blanca',
+              items:[
+                { ref:'10.1', item:'Porcelanato 60×60 cm', subs:[
+                    {mat:'Porcelanato importado',         und:'m²',qty:55,   vu:85000  },
+                    {mat:'Pegante blanco Corona',         und:'bolsa', qty:12,   vu:24900  },
+                    {mat:'Boquilla',                      und:'kg',    qty:8,    vu:12000  }
+                ]},
+                { ref:'10.2', item:'Enchape baño 30×60 cm', subs:[
+                    {mat:'Cerámica pared',            und:'m²',qty:28,   vu:42000  },
+                    {mat:'Pegante gris',                  und:'bolsa', qty:7,    vu:22000  }
+                ]}
+              ]
+            },
+            { id:11, name:'Aparatos hidrosanitarios',     phase:'blanca',
+              items:[
+                { ref:'11.1', item:'Sanitario One-piece', subs:[
+                    {mat:'Sanitario Corona Flux',         und:'und',   qty:2,    vu:420000 },
+                    {mat:'Instalación',              und:'und',   qty:2,    vu:65000  }
+                ]},
+                { ref:'11.2', item:'Lavamanos + grifería', subs:[
+                    {mat:'Lavamanos sobreponer',          und:'und',   qty:2,    vu:185000 },
+                    {mat:'Grifería monomando',       und:'und',   qty:2,    vu:145000 }
+                ]}
+              ]
+            },
+            { id:12, name:'Muebles armario y cocina',     phase:'blanca',
+              items:[
+                { ref:'12.1', item:'Mueble cocina bajo ml', subs:[
+                    {mat:'Mueble bajo melamina',          und:'ml',    qty:3.6,  vu:380000 },
+                    {mat:'Mesón cuarzo 2cm',         und:'ml',    qty:3.6,  vu:520000 }
+                ]},
+                { ref:'12.2', item:'Closet alcoba ml', subs:[
+                    {mat:'Closet melamina',               und:'ml',    qty:4.8,  vu:320000 },
+                    {mat:'Herrajes corredizos',           und:'und',   qty:4,    vu:45000  }
+                ]}
+              ]
+            },
+            { id:13, name:'Aseo y entrega',               phase:'blanca',
+              items:[
+                { ref:'13.1', item:'Aseo final de obra', subs:[
+                    {mat:'Mano de obra aseo',             und:'m²',qty:80,   vu:4000   },
+                    {mat:'Materiales limpieza',           und:'gbl',   qty:1,    vu:85000  }
+                ]},
+                { ref:'13.2', item:'Retiro escombros final', subs:[
+                    {mat:'Volqueta',                      und:'viaje', qty:3,    vu:180000 }
+                ]}
+              ]
+            }
+        ];
+
+        var active = 2;
+
+        function chapSum(c) {
+            return c.items.reduce(function (s, it) {
+                return s + it.subs.reduce(function (a, x) { return a + x.qty * x.vu; }, 0);
+            }, 0);
+        }
+
+        function fmt(n) {
+            return '$' + Math.round(n).toLocaleString('es-CO');
+        }
+
+        function fmtQty(q) {
+            return Number.isInteger(q) ? q.toLocaleString('es-CO') : q.toFixed(2);
+        }
+
+        function renderLeft() {
+            var html = '';
+            CHAPTERS.forEach(function (c) {
+                var t = chapSum(c);
+                var isActive = c.id === active;
+                html += '<div class="apu-chap-row' + (isActive ? ' active' : '') + '" onclick="apuSelect(' + c.id + ')">' +
+                    '<span class="apu-chap-num">' + c.id + '</span>' +
+                    '<span class="apu-chap-name">' + c.name + '</span>' +
+                    '<span class="apu-chap-val">' + fmt(t) + '</span>' +
+                    '<button class="btn-detalle" onclick="event.stopPropagation();apuSelect(' + c.id + ')">DETALLE</button>' +
+                '</div>';
+            });
+            document.getElementById('chapList').innerHTML = html;
+        }
+
+        function renderTabs() {
+            var html = '<div class="apu-tab' + (active === 0 ? ' active' : '') + '" onclick="apuSelect(0)">INICIO</div>';
+            CHAPTERS.forEach(function (c) {
+                html += '<div class="apu-tab' + (c.id === active ? ' active' : '') + '" onclick="apuSelect(' + c.id + ')">' + c.id + '.&nbsp;' + c.name + '</div>';
+            });
+            document.getElementById('apuTabs').innerHTML = html;
+            var tabs = document.getElementById('apuTabs');
+            var act = tabs.querySelector('.apu-tab.active');
+            if (act) act.scrollIntoView({ block: 'nearest', inline: 'center' });
+        }
+
+        function renderTable(chapId) {
+            var c = null;
+            for (var i = 0; i < CHAPTERS.length; i++) {
+                if (CHAPTERS[i].id === chapId) { c = CHAPTERS[i]; break; }
+            }
+
+            var badge = document.getElementById('detBadge');
+            var title = document.getElementById('detTitle');
+            var total = document.getElementById('detTotal');
+            var body  = document.getElementById('apuBody');
+            var bname = document.getElementById('buildingChapName');
+
+            if (!c) {
+                badge.textContent = 'APU';
+                title.textContent = 'Análisis de Precios Unitarios';
+                total.textContent = '';
+                bname.textContent = 'Resumen General';
+                var grand = CHAPTERS.reduce(function (s, ch) { return s + chapSum(ch); }, 0);
+                var overview = '';
+                CHAPTERS.forEach(function (ch) {
+                    var ct = chapSum(ch);
+                    var pct = Math.round(ct / grand * 100);
+                    overview += '<tr class="r-mat"><td class="col-ref">' + ch.id + '</td>' +
+                        '<td class="col-item" colspan="2">' + ch.name + '</td>' +
+                        '<td class="ac col-und">' + ch.phase.toUpperCase().replace('negra','ETAPA 1').replace('gris','ETAPA 2').replace('blanca','ETAPA 3') + '</td>' +
+                        '<td class="ar col-qty">' + pct + '%</td>' +
+                        '<td></td>' +
+                        '<td class="ar col-vt">' + fmt(ct) + '</td></tr>';
+                });
+                overview += '<tr class="r-tot"><td colspan="6" style="text-align:right">TOTAL GENERAL OBRA</td>' +
+                    '<td class="ar col-vt">' + fmt(grand) + '</td></tr>';
+                body.innerHTML = overview;
+                return;
+            }
+
+            badge.textContent = 'Cap. ' + c.id;
+            title.textContent = c.name;
+            bname.textContent = 'Cap. ' + c.id + ' — ' + c.name;
+            var ct = chapSum(c);
+            total.textContent = 'Total: ' + fmt(ct);
+
+            var html = '';
+            c.items.forEach(function (it) {
+                var itTotal = it.subs.reduce(function (s, x) { return s + x.qty * x.vu; }, 0);
+                html += '<tr class="r-sub">' +
+                    '<td class="col-ref"><strong>' + it.ref + '</strong></td>' +
+                    '<td class="col-item" colspan="2"><strong>' + it.item + '</strong></td>' +
+                    '<td></td><td></td><td></td>' +
+                    '<td class="ar col-vt" style="color:#1a4fff;">' + fmt(itTotal) + '</td>' +
+                '</tr>';
+                it.subs.forEach(function (s) {
+                    var vt = s.qty * s.vu;
+                    html += '<tr class="r-mat">' +
+                        '<td class="col-ref" style="color:#ccc;"></td>' +
+                        '<td class="col-item"></td>' +
+                        '<td class="col-sub">' + s.mat + '</td>' +
+                        '<td class="ac col-und">' + s.und + '</td>' +
+                        '<td class="ar col-qty">' + fmtQty(s.qty) + '</td>' +
+                        '<td class="ar col-vu">' + fmt(s.vu) + '</td>' +
+                        '<td class="ar col-vt">' + fmt(vt) + '</td>' +
+                    '</tr>';
+                });
+            });
+            html += '<tr class="r-tot">' +
+                '<td colspan="6" style="text-align:right;font-size:11.5px;">TOTAL CAPÍTULO ' + c.id + '</td>' +
+                '<td class="ar col-vt">' + fmt(ct) + '</td>' +
+            '</tr>';
+            body.innerHTML = html;
+        }
+
+        window.apuSelect = function (id) {
+            active = id;
+            renderLeft();
+            renderTabs();
+            renderTable(id);
+        };
+
+        renderLeft();
+        renderTabs();
+        renderTable(active);
+    })();
+    </script>
+</body>
+</html>
