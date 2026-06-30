@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COMFER - Unidos Construimos</title>
+    <link rel="stylesheet" href="css/comfer.css">
+</head>
+
+<body>
+
+    <!-- ===== PANTALLA DE BIENVENIDA ===== -->
+    <div id="cf-bienvenida" class="cf-bienvenida-overlay">
+        <div class="cf-bienvenida-card">
+            <img src="img/Logo.JPG" alt="COMFER" class="cf-bienvenida-logo">
+            <h1 class="cf-bienvenida-titulo">¡Bienvenido a COMFER!</h1>
+            <p class="cf-bienvenida-subtitulo">Unidos Construimos</p>
+            <p class="cf-bienvenida-texto">
+                Tu ferretería de confianza para materiales de construcción,
+                diseño, presupuesto y mucho más.
+            </p>
+            <button class="cf-bienvenida-btn" onclick="cerrarBienvenida()">
+                Aceptar e Ingresar
+            </button>
+        </div>
+    </div>
+
+    <script src="js/nav.js"></script>
+
+    <!-- ===== BUSCADOR HERO ===== -->
+    <section class="cf-search-hero" id="inicio">
+        <div class="cf-search-hero-inner">
+
+            <img src="img/Logo.JPG" alt="COMFER - Unidos Construimos" class="cf-search-logo">
+
+            <div class="cf-search-bar" id="cf-search-bar">
+                <button class="cf-sb-plus" title="Opciones" onclick="document.getElementById('buscador').focus()">+</button>
+                <input
+                    type="text"
+                    id="buscador"
+                    class="cf-sb-input"
+                    placeholder=""
+                    autocomplete="off"
+                    oninput="filtrarMateriales()"
+                    onkeydown="if(event.key==='Enter') buscarMateriales()">
+                <button class="cf-sb-icon" title="Buscar por voz" onclick="iniciarVoz()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="2" width="6" height="12" rx="3"/>
+                        <path d="M5 10a7 7 0 0 0 14 0"/>
+                        <line x1="12" y1="17" x2="12" y2="21"/>
+                        <line x1="9" y1="21" x2="15" y2="21"/>
+                    </svg>
+                </button>
+                <button class="cf-sb-icon" title="Buscar por imagen">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="4"/>
+                        <path d="M11 7V4M11 18v-3M7 11H4M18 11h-3"/>
+                        <circle cx="11" cy="11" r="8"/>
+                    </svg>
+                </button>
+                <button class="cf-sb-icon cf-sb-go" title="Buscar" onclick="buscarMateriales()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"/>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div id="cf-sugerencias" class="cf-sugerencias" style="display:none;"></div>
+
+            <button class="cf-search-cta" onclick="buscarMateriales()">
+                Buscar Materiales y proyectos
+            </button>
+
+            <p class="cf-search-hint">Escribí un material, categoría o servicio</p>
+
+        </div>
+    </section>
+
+    <!-- ===== MAIN ===== -->
+    <main>
+
+        <!-- CARDS -->
+        <section class="cf-cards-section">
+            <p class="cf-section-label">Nuestros Servicios</p>
+            <div class="cf-cards-grid">
+
+                <!-- MATERIALES DE CONSTRUCCIÓN -->
+                <div class="card_home" data-servicio="MATERIALES DE CONSTRUCCIÓN">
+                    <div class="card-imagen card-img-trigger"
+                         onclick="this.nextElementSibling.click()">
+                        <img src="img/IMPRIMIR.png" alt="Materiales de Construcción">
+                    </div>
+                    <button class="menu-btn" aria-expanded="false" onclick="toggleMenu(this)">
+                        <span>MATERIALES DE CONSTRUCCIÓN</span>
+                        <span class="arrow">❯</span>
+                    </button>
+                    <ul class="sidebar-submenu">
+                        <li class="submenu-categoria">Papel Bond</li>
+                        <li class="item-precio">
+                            <div class="item-precio-fila">
+                                <span class="item-nombre">Pliego</span>
+                                <span class="item-valor">$5.000</span>
+                            </div>
+                            <label class="file-option">
+                                <span class="file-option-text">Adjuntar archivo</span>
+                                <input type="file"
+                                       accept=".pdf,.dwg,.dxf,.doc,.docx,.xlsx,.zip"
+                                       onchange="registrarArchivo(this)">
+                                <span class="file-name"></span>
+                            </label>
+                        </li>
+                        <li class="item-precio">
+                            <div class="item-precio-fila">
+                                <span class="item-nombre">Medio Pliego</span>
+                                <span class="item-valor">$4.000</span>
+                            </div>
+                            <label class="file-option">
+                                <span class="file-option-text">Adjuntar archivo</span>
+                                <input type="file"
+                                       accept=".pdf,.dwg,.dxf,.doc,.docx,.xlsx,.zip"
+                                       onchange="registrarArchivo(this)">
+                                <span class="file-name"></span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- DISEÑAR / REMODELAR -->
+                <div class="card_home" data-servicio="DISEÑAR / REMODELAR">
+                    <div class="card-imagen card-img-trigger"
+                         onclick="this.nextElementSibling.click()">
+                        <img src="img/DISEÑAR.png" alt="Diseñar / Remodelar">
+                    </div>
+                    <button class="menu-btn" aria-expanded="false" onclick="toggleMenu(this)">
+                        <span>DISEÑAR / REMODELAR</span>
+                        <span class="arrow">❯</span>
+                    </button>
+                    <ul class="sidebar-submenu">
+                        <li>
+                            <label class="file-option">
+                                <span class="file-option-text">Adjuntar archivo</span>
+                                <input type="file"
+                                       accept=".pdf,.dwg,.dxf,.doc,.docx,.xlsx,.zip"
+                                       onchange="registrarArchivo(this)">
+                                <span class="file-name"></span>
+                            </label>
+                        </li>
+                        <li>
+                            <label class="file-option">
+                                <span class="file-option-text">Adjuntar fotografía</span>
+                                <input type="file"
+                                       accept="image/*"
+                                       onchange="registrarArchivo(this)">
+                                <span class="file-name"></span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- PRESUPUESTAR -->
+                <div class="card_home" data-servicio="PRESUPUESTAR">
+                    <div class="card-imagen card-img-trigger"
+                         onclick="this.nextElementSibling.click()">
+                        <img src="img/PRESUPUESTAR.png" alt="Presupuestar">
+                    </div>
+                    <button class="menu-btn" aria-expanded="false" onclick="toggleMenu(this)">
+                        <span>PRESUPUESTAR</span>
+                        <span class="arrow">❯</span>
+                    </button>
+                    <ul class="sidebar-submenu">
+                        <li><a href="#">Materiales</a></li>
+                        <li><a href="#">Mano de obra</a></li>
+                        <li><a href="#">Prefabricados</a></li>
+                    </ul>
+                </div>
+
+                <!-- CONSTRUIR -->
+                <div class="card_home" data-servicio="CONSTRUIR">
+                    <div class="card-imagen card-img-trigger"
+                         onclick="this.nextElementSibling.click()">
+                        <img src="img/CONSTRUIR.png" alt="Construir">
+                    </div>
+                    <button class="menu-btn" aria-expanded="false" onclick="toggleMenu(this)">
+                        <span>CONSTRUIR</span>
+                        <span class="arrow">❯</span>
+                    </button>
+                    <ul class="sidebar-submenu">
+                        <li><a href="#">Cotizar contrato de obra</a></li>
+                        <li><a href="#">Costo de trabajo</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- REGISTRO DE ARCHIVOS -->
+        <section id="registro-archivos" class="seccion_registro" style="display:none;">
+            <h2 class="registro-titulo">Archivos Registrados</h2>
+            <div id="lista-archivos" class="lista-archivos"></div>
+        </section>
+
+        <!-- CATEGORÍAS DESPLEGADAS -->
+        <section class="cf-categorias-section" id="cf-categorias">
+            <div class="cf-categorias-header">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                     stroke="#C8501A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <line x1="3" y1="12" x2="21" y2="12"/>
+                    <line x1="3" y1="18" x2="21" y2="18"/>
+                </svg>
+                <h2>Materiales de Construcción</h2>
+            </div>
+            <div class="cf-categorias-grid">
+
+                <div class="cf-cat-col" id="cf-cat-hierro">
+                    <h3 class="cf-cat-titulo">HIERRO</h3>
+                    <ul>
+                        <li><a href="#">Varilla</a></li>
+                        <li><a href="#">Alambre</a></li>
+                        <li><a href="#">Mallas electrosoldadas</a></li>
+                        <li><a href="#">Perfilería estructural</a></li>
+                    </ul>
+                </div>
+
+                <div class="cf-cat-col" id="cf-cat-mat">
+                    <h3 class="cf-cat-titulo">MATERIALES</h3>
+                    <ul>
+                        <li><a href="#">Pegantes</a></li>
+                        <li><a href="#">Boquillas</a></li>
+                        <li><a href="#">Estucos</a></li>
+                        <li><a href="#">Aseo y mantenimiento</a></li>
+                        <li><a href="#">Impermeabilizantes</a></li>
+                    </ul>
+                </div>
+
+                <div class="cf-cat-col" id="cf-cat-pvc">
+                    <h3 class="cf-cat-titulo">PVC</h3>
+                    <ul>
+                        <li><a href="#">Alcantarillado</a></li>
+                        <li><a href="#">Sanitario</a></li>
+                        <li><a href="#">Presión</a></li>
+                        <li><a href="#">Ventilación</a></li>
+                        <li><a href="#">Conduit</a></li>
+                    </ul>
+                </div>
+
+                <div class="cf-cat-col" id="cf-cat-cem">
+                    <h3 class="cf-cat-titulo">CEMENTO</h3>
+                    <ul>
+                        <li><a href="#">Uso General</a></li>
+                        <li><a href="#">Estructural</a></li>
+                        <li><a href="#">Mampostero</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SERVICIOS BAR + HERO -->
+        <section class="cf-hero-section">
+
+            <div class="cf-servicios-bar">
+                <div class="cf-srv-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                        <line x1="1" y1="10" x2="23" y2="10"/>
+                    </svg>
+                    Financiación
+                </div>
+                <span class="cf-srv-sep">|</span>
+                <div class="cf-srv-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                    Asesoría
+                </div>
+                <span class="cf-srv-sep">|</span>
+                <div class="cf-srv-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="1" y="3" width="15" height="13"/>
+                        <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                        <circle cx="5.5" cy="18.5" r="2.5"/>
+                        <circle cx="18.5" cy="18.5" r="2.5"/>
+                    </svg>
+                    Envíos
+                </div>
+            </div>
+
+            <div class="cf-hero-bg">
+                <img src="img/portada.JPG" alt="" class="cf-hero-img">
+                <div class="cf-hero-content">
+                    <a href="#" class="cf-cotiza-btn">COTIZA HOY</a>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="cf-footer">
+        <div class="cf-footer-inner">
+            <div class="cf-footer-logo">
+                <span class="cf-footer-name">COMFER</span>
+                <span class="cf-footer-tagline">Unidos Construimos</span>
+            </div>
+            <div class="cf-footer-redes">
+                <a href="https://www.facebook.com" target="_blank">
+                    <img src="img/iconofacebook.png" alt="Facebook">
+                </a>
+                <a href="https://www.instagram.com" target="_blank">
+                    <img src="img/iconoinstagram.png" alt="Instagram">
+                </a>
+                <a href="https://wa.me/3156266703" target="_blank">
+                    <img src="img/iconowhatsapp.png" alt="WhatsApp">
+                </a>
+            </div>
+            <div class="cf-footer-contact">
+                <p>&#128222; +57 (315) 626-6703</p>
+                <p><a href="mailto:info@comfer.co">info@comfer.co</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        /* ── Bienvenida ── */
+        function cerrarBienvenida() {
+            const overlay = document.getElementById('cf-bienvenida');
+            overlay.classList.add('cf-bienvenida-oculto');
+            overlay.addEventListener('transitionend', () => overlay.remove(), { once: true });
+        }
+
+        /* ── Índice de búsqueda: todos los ítems del catálogo ── */
+        const CATALOGO = [
+            // categorías principales
+            { texto: 'Hierro',                 seccion: '#cf-cat-hierro' },
+            { texto: 'Varilla',                seccion: '#cf-cat-hierro' },
+            { texto: 'Alambre',                seccion: '#cf-cat-hierro' },
+            { texto: 'Mallas electrosoldadas', seccion: '#cf-cat-hierro' },
+            { texto: 'Perfilería estructural', seccion: '#cf-cat-hierro' },
+            { texto: 'Materiales',             seccion: '#cf-cat-mat' },
+            { texto: 'Pegantes',               seccion: '#cf-cat-mat' },
+            { texto: 'Boquillas',              seccion: '#cf-cat-mat' },
+            { texto: 'Estucos',                seccion: '#cf-cat-mat' },
+            { texto: 'Aseo y mantenimiento',   seccion: '#cf-cat-mat' },
+            { texto: 'Impermeabilizantes',     seccion: '#cf-cat-mat' },
+            { texto: 'PVC',                    seccion: '#cf-cat-pvc' },
+            { texto: 'Alcantarillado',         seccion: '#cf-cat-pvc' },
+            { texto: 'Sanitario',              seccion: '#cf-cat-pvc' },
+            { texto: 'Presión',                seccion: '#cf-cat-pvc' },
+            { texto: 'Ventilación',            seccion: '#cf-cat-pvc' },
+            { texto: 'Conduit',                seccion: '#cf-cat-pvc' },
+            { texto: 'Cemento',                seccion: '#cf-cat-cem' },
+            { texto: 'Uso General',            seccion: '#cf-cat-cem' },
+            { texto: 'Estructural',            seccion: '#cf-cat-cem' },
+            { texto: 'Mampostero',             seccion: '#cf-cat-cem' },
+            // servicios / cards
+            { texto: 'Materiales de Construcción', seccion: '#card-mat' },
+            { texto: 'Diseñar',                seccion: '#card-dis' },
+            { texto: 'Remodelar',              seccion: '#card-dis' },
+            { texto: 'Presupuestar',           seccion: '#card-pre' },
+            { texto: 'Construir',              seccion: '#card-con' },
+        ];
+
+        /* ── Sugerencias en tiempo real ── */
+        function filtrarMateriales() {
+            const q = document.getElementById('buscador').value.trim().toLowerCase();
+            const box = document.getElementById('cf-sugerencias');
+            if (!q) { box.style.display = 'none'; limpiarResaltado(); return; }
+
+            const coincidencias = CATALOGO.filter(i => i.texto.toLowerCase().includes(q)).slice(0, 6);
+            if (!coincidencias.length) { box.style.display = 'none'; return; }
+
+            box.innerHTML = coincidencias.map(i =>
+                `<div class="cf-sug-item" onclick="elegirSugerencia('${i.texto}')">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C8501A"
+                         stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/>
+                         <line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    ${i.texto}
+                </div>`
+            ).join('');
+            box.style.display = 'block';
+        }
+
+        function elegirSugerencia(texto) {
+            document.getElementById('buscador').value = texto;
+            document.getElementById('cf-sugerencias').style.display = 'none';
+            buscarMateriales();
+        }
+
+        /* ── Ejecutar búsqueda ── */
+        function buscarMateriales() {
+            const q = document.getElementById('buscador').value.trim().toLowerCase();
+            document.getElementById('cf-sugerencias').style.display = 'none';
+
+            limpiarResaltado();
+            if (!q) {
+                document.getElementById('cf-categorias').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                return;
+            }
+
+            let primerMatch = null;
+            let hayResultados = false;
+
+            /* Resaltar en listado de categorías */
+            document.querySelectorAll('.cf-cat-col').forEach(col => {
+                const titulo = col.querySelector('.cf-cat-titulo');
+                const items  = col.querySelectorAll('ul li a');
+                let colMatch = titulo.textContent.toLowerCase().includes(q);
+
+                items.forEach(a => {
+                    if (a.textContent.toLowerCase().includes(q)) {
+                        a.classList.add('cf-resaltado');
+                        a.closest('li').style.display = '';
+                        colMatch = true;
+                        hayResultados = true;
+                        if (!primerMatch) primerMatch = a;
+                    } else {
+                        a.closest('li').style.display = 'none';
+                    }
+                });
+
+                if (titulo.textContent.toLowerCase().includes(q)) {
+                    titulo.classList.add('cf-resaltado-titulo');
+                    items.forEach(a => { a.closest('li').style.display = ''; });
+                    hayResultados = true;
+                    if (!primerMatch) primerMatch = col;
+                }
+
+                col.style.opacity = colMatch ? '1' : '0.25';
+            });
+
+            /* Resaltar cards que coincidan */
+            document.querySelectorAll('.card_home').forEach(card => {
+                const label = card.querySelector('.menu-btn span:first-child');
+                if (label && label.textContent.toLowerCase().includes(q)) {
+                    card.classList.add('cf-card-match');
+                    hayResultados = true;
+                    if (!primerMatch) primerMatch = card;
+                }
+            });
+
+            if (primerMatch) {
+                primerMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            } else {
+                document.getElementById('cf-categorias').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+            if (!hayResultados) mostrarSinResultados(q);
+        }
+
+        function limpiarResaltado() {
+            document.querySelectorAll('.cf-resaltado').forEach(el => el.classList.remove('cf-resaltado'));
+            document.querySelectorAll('.cf-resaltado-titulo').forEach(el => el.classList.remove('cf-resaltado-titulo'));
+            document.querySelectorAll('.cf-cat-col').forEach(col => {
+                col.style.opacity = '1';
+                col.querySelectorAll('ul li').forEach(li => li.style.display = '');
+            });
+            document.querySelectorAll('.card_home').forEach(c => c.classList.remove('cf-card-match'));
+            const aviso = document.getElementById('cf-sin-resultados');
+            if (aviso) aviso.remove();
+        }
+
+        function mostrarSinResultados(q) {
+            let aviso = document.getElementById('cf-sin-resultados');
+            if (!aviso) {
+                aviso = document.createElement('p');
+                aviso.id = 'cf-sin-resultados';
+                aviso.className = 'cf-sin-resultados';
+                document.getElementById('cf-categorias').prepend(aviso);
+            }
+            aviso.textContent = `No se encontraron resultados para "${q}". Intenta con otro término.`;
+        }
+
+        /* ── Voz (Web Speech API) ── */
+        function iniciarVoz() {
+            if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
+                alert('Tu navegador no soporta búsqueda por voz.');
+                return;
+            }
+            const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const rec = new SR();
+            rec.lang = 'es-CO';
+            rec.start();
+            rec.onresult = e => {
+                document.getElementById('buscador').value = e.results[0][0].transcript;
+                buscarMateriales();
+            };
+        }
+
+        /* ── Cerrar sugerencias al hacer clic afuera ── */
+        document.addEventListener('click', e => {
+            if (!document.getElementById('cf-search-bar').contains(e.target)) {
+                document.getElementById('cf-sugerencias').style.display = 'none';
+            }
+        });
+
+        /* ── Acordeón de cards ── */
+        function toggleMenu(boton) {
+            const estaAbierto = boton.getAttribute('aria-expanded') === 'true';
+            const submenu = boton.nextElementSibling;
+            boton.setAttribute('aria-expanded', String(!estaAbierto));
+            submenu.classList.toggle('abierto', !estaAbierto);
+        }
+
+        /* ── Registrar archivo adjunto ── */
+        function registrarArchivo(input) {
+            if (!input.files.length) return;
+            const archivo  = input.files[0];
+            const card     = input.closest('.card_home');
+            const servicio = card ? card.dataset.servicio : 'General';
+            const esImagen = input.accept.startsWith('image');
+            const tamaño   = archivo.size < 1024 * 1024
+                             ? (archivo.size / 1024).toFixed(1) + ' KB'
+                             : (archivo.size / (1024 * 1024)).toFixed(2) + ' MB';
+            const fecha    = new Date().toLocaleString('es-CO');
+
+            input.nextElementSibling.textContent = '✔ ' + archivo.name;
+
+            const entrada = document.createElement('div');
+            entrada.className = 'archivo-entrada';
+
+            if (esImagen) {
+                const url = URL.createObjectURL(archivo);
+                entrada.innerHTML = `
+                    <img src="${url}" class="archivo-preview-img" alt="${archivo.name}">
+                    <div class="archivo-datos">
+                        <p class="archivo-nombre">${archivo.name}</p>
+                        <p class="archivo-meta">&#128194; ${tamaño} &nbsp;&middot;&nbsp; Servicio: <strong>${servicio}</strong></p>
+                        <p class="archivo-fecha">&#128336; ${fecha}</p>
+                    </div>
+                    <button class="btn-quitar" title="Quitar" onclick="quitarEntrada(this)">&#x2715;</button>`;
+            } else {
+                entrada.innerHTML = `
+                    <div class="archivo-icono-doc">&#128196;</div>
+                    <div class="archivo-datos">
+                        <p class="archivo-nombre">${archivo.name}</p>
+                        <p class="archivo-meta">&#128194; ${tamaño} &nbsp;&middot;&nbsp; Servicio: <strong>${servicio}</strong></p>
+                        <p class="archivo-fecha">&#128336; ${fecha}</p>
+                    </div>
+                    <button class="btn-quitar" title="Quitar" onclick="quitarEntrada(this)">&#x2715;</button>`;
+            }
+
+            const lista   = document.getElementById('lista-archivos');
+            const seccion = document.getElementById('registro-archivos');
+            lista.appendChild(entrada);
+            seccion.style.display = 'block';
+            seccion.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        /* ── Quitar entrada ── */
+        function quitarEntrada(btn) {
+            btn.parentElement.remove();
+            if (!document.getElementById('lista-archivos').children.length) {
+                document.getElementById('registro-archivos').style.display = 'none';
+            }
+        }
+    </script>
+    <script src="js/cart.js"></script>
+</body>
+</html>
