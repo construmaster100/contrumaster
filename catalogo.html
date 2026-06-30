@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo - COMFER</title>
+    <link rel="stylesheet" href="css/comfer.css">
+</head>
+<body>
+    <script src="js/nav.js"></script>
+
+    <div class="cat-page">
+        <div class="cat-layout">
+
+            <!-- ===== SIDEBAR FILTROS ===== -->
+            <aside class="cat-sidebar">
+                <p class="cat-sidebar-title">Filtrar por</p>
+
+                <!-- Stock en tienda -->
+                <div class="cat-filter">
+                    <button class="cat-filter-head open" onclick="toggleFiltro(this)">
+                        Stock en tienda
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg>
+                    </button>
+                    <div class="cat-filter-body">
+                        <label class="cat-chk"><input type="checkbox" checked> Cali Norte <span class="cat-chk-count">48</span></label>
+                        <label class="cat-chk"><input type="checkbox"> Barranquilla Norte <span class="cat-chk-count">31</span></label>
+                        <label class="cat-chk"><input type="checkbox"> Medellín San Juan <span class="cat-chk-count">56</span></label>
+                        <label class="cat-chk"><input type="checkbox"> Cali Sur <span class="cat-chk-count">29</span></label>
+                        <button class="cat-ver-mas">Ver más</button>
+                    </div>
+                </div>
+
+                <!-- Tipo -->
+                <div class="cat-filter">
+                    <button class="cat-filter-head" onclick="toggleFiltro(this)">
+                        Tipo
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg>
+                    </button>
+                    <div class="cat-filter-body hidden">
+                        <label class="cat-chk"><input type="checkbox"> Hierro y acero <span class="cat-chk-count">134</span></label>
+                        <label class="cat-chk"><input type="checkbox"> Cemento <span class="cat-chk-count">89</span></label>
+                        <label class="cat-chk"><input type="checkbox"> PVC <span class="cat-chk-count">201</span></label>
+                        <label class="cat-chk"><input type="checkbox"> Pintura <span class="cat-chk-count">156</span></label>
+                        <label class="cat-chk"><input type="checkbox"> Pegantes <span class="cat-chk-count">78</span></label>
+                    </div>
+                </div>
+
+                <!-- Precio -->
+                <div class="cat-filter">
+                    <button class="cat-filter-head open" onclick="toggleFiltro(this)">
+                        Precio
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg>
+                    </button>
+                    <div class="cat-filter-body">
+                        <div class="cat-price-range-label">
+                            <span>$ 1.700</span><span>$ 900.000</span>
+                        </div>
+                        <input type="range" class="cat-range" min="1700" max="900000" value="450000"
+                               oninput="document.getElementById('precioVal').textContent='$'+Number(this.value).toLocaleString('es-CO')">
+                        <p style="font-size:12px;color:#555;margin:4px 0 8px;text-align:center;" id="precioVal">$ 450.000</p>
+                        <label class="cat-chk"><input type="checkbox"> Hasta $10.000 <span class="cat-chk-count">26</span></label>
+                        <label class="cat-chk"><input type="checkbox"> $10.000 - $50.000 <span class="cat-chk-count">88</span></label>
+                        <label class="cat-chk" ><input type="checkbox" checked> $50.000 - $150.000 <span class="cat-chk-count">1.849</span></label>
+                        <label class="cat-chk"><input type="checkbox"> $150.000 - $300.000 <span class="cat-chk-count">1.709</span></label>
+                        <label class="cat-chk"><input type="checkbox"> $300.000 - $600.000 <span class="cat-chk-count">1.059</span></label>
+                        <label class="cat-chk"><input type="checkbox"> Más de $600.000 <span class="cat-chk-count">3.990</span></label>
+                    </div>
+                </div>
+
+                <!-- Marca -->
+                <div class="cat-filter">
+                    <button class="cat-filter-head" onclick="toggleFiltro(this)">
+                        Marca
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="18 15 12 9 6 15"/></svg>
+                    </button>
+                    <div class="cat-filter-body hidden">
+                        <label class="cat-chk"><input type="checkbox"> Argos <span class="cat-chk-count">89</span></label>
+                        <label class="cat-chk"><input type="checkbox"> Sika <span class="cat-chk-count">64</span></label>
+                        <label class="cat-chk"><input type="checkbox"> Corona <span class="cat-chk-count">112</span></label>
+                        <label class="cat-chk"><input type="checkbox"> Pintuco <span class="cat-chk-count">78</span></label>
+                        <label class="cat-chk"><input type="checkbox"> Pavco Wavin <span class="cat-chk-count">143</span></label>
+                        <label class="cat-chk"><input type="checkbox"> Correval <span class="cat-chk-count">45</span></label>
+                        <button class="cat-ver-mas">Ver más</button>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- ===== CONTENIDO PRINCIPAL ===== -->
+            <main class="cat-main">
+
+                <div class="cat-header">
+                    <div>
+                        <h1>Materiales de Construcción</h1>
+                        <span class="cat-count" id="catCount">Mostrando 8 de 7.124 productos</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:10px;">
+                        <select class="cat-sort" onchange="ordenar(this.value)">
+                            <option value="">Ordenar por relevancia</option>
+                            <option value="precio-asc">Menor precio</option>
+                            <option value="precio-desc">Mayor precio</option>
+                            <option value="rating">Mejor calificados</option>
+                            <option value="descuento">Mayor descuento</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="prod-grid" id="prodGrid">
+
+                    <!-- ── Producto 1 ── -->
+                    <article class="prod-card" data-precio="45000" data-rating="5" data-desc="49" data-id="p1" data-brand="Siderúrgica del Occidente" data-name="Varilla Corrugada 1/2&quot; Grado 60 x 6 metros — Acero 420 MPa" data-emoji="🔩">
+                        <div class="prod-card-top">
+                            <label class="prod-compare"><input type="checkbox"> Comparar</label>
+                            <div class="prod-badge-wrap"></div>
+                        </div>
+                        <div class="prod-img-wrap">
+                            <img src="img/varila.JPG" alt="Varilla Corrugada" class="prod-img">
+                        </div>
+                        <div class="prod-info">
+                            <p class="prod-brand">Siderúrgica del Occidente</p>
+                            <p class="prod-name">Varilla Corrugada 1/2" Grado 60 x 6 metros — Acero 420 MPa</p>
+                            <p class="prod-sponsored">Patrocinado</p>
+                            <div class="prod-rating">
+                                <span class="prod-stars">★★★★★</span>
+                                <span class="prod-rating-count">(234)</span>
+                            </div>
+                            <div class="prod-price-box">
+                                <div class="prod-price-badge">
+                                    <span class="ppb-label">PRECIO INTERNET</span>
+                                    <span class="ppb-pct">-49%</span>
+                                </div>
+                                <p class="prod-price">$45.000 <span class="prod-unit">und</span></p>
+                                <p class="prod-price-was">$89.000 und</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ── Producto 2 ── -->
+                    <article class="prod-card" data-precio="34900" data-rating="4" data-desc="4" data-id="p2" data-brand="Argos" data-name="Cemento Portland Gris Tipo I — Bolsa 50 kg para uso estructural" data-emoji="🏗️">
+                        <div class="prod-card-top">
+                            <label class="prod-compare"><input type="checkbox"> Comparar</label>
+                            <div class="prod-badge-wrap">
+                                <span class="badge-campeones">Precio Campeones</span>
+                            </div>
+                        </div>
+                        <div class="prod-img-wrap">
+                            <img src="img/cemento.JPG" alt="Cemento Portland" class="prod-img">
+                        </div>
+                        <div class="prod-info">
+                            <p class="prod-brand">Argos</p>
+                            <p class="prod-name">Cemento Portland Gris Tipo I — Bolsa 50 kg para uso estructural</p>
+                            <p class="prod-sponsored">Patrocinado</p>
+                            <div class="prod-rating">
+                                <span class="prod-stars">★★★★☆</span>
+                                <span class="prod-rating-count">(89)</span>
+                            </div>
+                            <div class="prod-price-box">
+                                <div class="prod-price-badge">
+                                    <span class="ppb-label">PRECIO INTERNET</span>
+                                    <span class="ppb-pct">-4%</span>
+                                </div>
+                                <p class="prod-price">$34.900 <span class="prod-unit">und</span></p>
+                                <p class="prod-price-was">$36.500 und</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ── Producto 3 ── -->
+                    <article class="prod-card" data-precio="28500" data-rating="4" data-desc="19" data-id="p3" data-brand="Pavco Wavin" data-name="Tubo PVC Alcantarillado 4&quot; x 3 m — Norma NTC 2546" data-emoji="🪠">
+                        <div class="prod-card-top">
+                            <label class="prod-compare"><input type="checkbox"> Comparar</label>
+                            <div class="prod-badge-wrap">
+                                <span class="badge-envio">Envío 48hs</span>
+                            </div>
+                        </div>
+                        <div class="prod-img-wrap">
+                            <img src="img/sanitario.JPG" alt="Tubo PVC" class="prod-img">
+                        </div>
+                        <div class="prod-info">
+                            <p class="prod-brand">Pavco Wavin</p>
+                            <p class="prod-name">Tubo PVC Alcantarillado 4" x 3 m — Norma NTC 2546</p>
+                            <div class="prod-rating">
+                                <span class="prod-stars">★★★★☆</span>
+                                <span class="prod-rating-count">(156)</span>
+                            </div>
+                            <div class="prod-price-box">
+                                <div class="prod-price-badge">
+                                    <span class="ppb-label">PRECIO INTERNET</span>
+                                    <span class="ppb-pct">-19%</span>
+                                </div>
+                                <p class="prod-price">$28.500 <span class="prod-unit">und</span></p>
+                                <p class="prod-price-was">$35.000 und</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ── Producto 4 ── -->
+                    <article class="prod-card" data-precio="10890" data-rating="4" data-desc="27" data-id="p4" data-brand="Ladrillera Santafé" data-name="Ladrillo Farol No.5 Tolete x 12 und — 23x11.5x6 cm" data-emoji="🧱">
+                        <div class="prod-card-top">
+                            <label class="prod-compare"><input type="checkbox"> Comparar</label>
+                            <div class="prod-badge-wrap">
+                                <span class="badge-exclusivo">Exclusivo</span>
+                                <span class="badge-campeones">Precio Campeones</span>
+                            </div>
+                        </div>
+                        <div class="prod-img-wrap">
+                            <img src="img/ladrillo.JPG" alt="Ladrillo" class="prod-img">
+                        </div>
+                        <div class="prod-info">
+                            <p class="prod-brand">Ladrillera Santafé</p>
+                            <p class="prod-name">Ladrillo Farol No.5 Tolete x 12 und — 23x11.5x6 cm</p>
+                            <div class="prod-rating">
+                                <span class="prod-stars">★★★★☆</span>
+                                <span class="prod-rating-count">(453)</span>
+                            </div>
+                            <div class="prod-price-box">
+                                <div class="prod-price-badge">
+                                    <span class="ppb-label">PRECIO INTERNET</span>
+                                    <span class="ppb-pct">-27%</span>
+                                </div>
+                                <p class="prod-price">$10.890 <span class="prod-unit">und</span></p>
+                                <p class="prod-price-was">$14.900 und</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ── Producto 5 ── -->
+                    <article class="prod-card" data-precio="89900" data-rating="4" data-desc="40" data-id="p5" data-brand="Pintuco" data-name="Pintura de Caucho Interior Blanco Hueso 4 Gal — Acabado mate lavable" data-emoji="🎨">
+                        <div class="prod-card-top">
+                            <label class="prod-compare"><input type="checkbox"> Comparar</label>
+                            <div class="prod-badge-wrap"></div>
+                        </div>
+                        <div class="prod-img-wrap">
+                            <img src="img/pintura.JPG" alt="Pintura de Caucho" class="prod-img">
+                        </div>
+                        <div class="prod-info">
+                            <p class="prod-brand">Pintuco</p>
+                            <p class="prod-name">Pintura de Caucho Interior Blanco Hueso 4 Gal — Acabado mate lavable</p>
+                            <div class="prod-rating">
+                                <span class="prod-stars">★★★★☆</span>
+                                <span class="prod-rating-count">(71)</span>
+                            </div>
+                            <div class="prod-price-box">
+                                <div class="prod-price-badge">
+                                    <span class="ppb-label">PRECIO INTERNET</span>
+                                    <span class="ppb-pct">-40%</span>
+                                </div>
+                                <p class="prod-price">$89.900 <span class="prod-unit">und</span></p>
+                                <p class="prod-price-was">$149.900 und</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ── Producto 6 ── -->
+                    <article class="prod-card" data-precio="156000" data-rating="4" data-desc="17" data-id="p6" data-brand="Correval" data-name="Malla Electrosoldada 15×15×3.5 mm — Panel 1.5×3 m galvanizada" data-emoji="🔗">
+                        <div class="prod-card-top">
+                            <label class="prod-compare"><input type="checkbox"> Comparar</label>
+                            <div class="prod-badge-wrap"></div>
+                        </div>
+                        <div class="prod-img-wrap">
+                            <img src="img/mallaelectro.JPG" alt="Malla Electrosoldada" class="prod-img">
+                        </div>
+                        <div class="prod-info">
+                            <p class="prod-brand">Correval</p>
+                            <p class="prod-name">Malla Electrosoldada 15×15×3.5 mm — Panel 1.5×3 m galvanizada</p>
+                            <div class="prod-rating">
+                                <span class="prod-stars">★★★★☆</span>
+                                <span class="prod-rating-count">(33)</span>
+                            </div>
+                            <div class="prod-price-box">
+                                <div class="prod-price-badge">
+                                    <span class="ppb-label">PRECIO INTERNET</span>
+                                    <span class="ppb-pct">-17%</span>
+                                </div>
+                                <p class="prod-price">$156.000 <span class="prod-unit">und</span></p>
+                                <p class="prod-price-was">$189.000 und</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ── Producto 7 ── -->
+                    <article class="prod-card" data-precio="124900" data-rating="5" data-desc="34" data-id="p7" data-brand="Sika" data-name="Impermeabilizante Sika Látex 4 L — Para morteros y concretos" data-emoji="💧">
+                        <div class="prod-card-top">
+                            <label class="prod-compare"><input type="checkbox"> Comparar</label>
+                            <div class="prod-badge-wrap">
+                                <span class="badge-campeones">Precio Campeones</span>
+                            </div>
+                        </div>
+                        <div class="prod-img-wrap">
+                            <img src="img/hidraulico.JPG" alt="Impermeabilizante" class="prod-img">
+                        </div>
+                        <div class="prod-info">
+                            <p class="prod-brand">Sika</p>
+                            <p class="prod-name">Impermeabilizante Sika Látex 4 L — Para morteros y concretos</p>
+                            <div class="prod-rating">
+                                <span class="prod-stars">★★★★★</span>
+                                <span class="prod-rating-count">(167)</span>
+                            </div>
+                            <div class="prod-price-box">
+                                <div class="prod-price-badge">
+                                    <span class="ppb-label">PRECIO INTERNET</span>
+                                    <span class="ppb-pct">-34%</span>
+                                </div>
+                                <p class="prod-price">$124.900 <span class="prod-unit">und</span></p>
+                                <p class="prod-price-was">$189.000 und</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- ── Producto 8 ── -->
+                    <article class="prod-card" data-precio="24900" data-rating="3" data-desc="13" data-id="p8" data-brand="Corona" data-name="Pegante Blanco Premium 25 kg — Para cerámica, porcelana y granito" data-emoji="🏺">
+                        <div class="prod-card-top">
+                            <label class="prod-compare"><input type="checkbox"> Comparar</label>
+                            <div class="prod-badge-wrap">
+                                <span class="badge-exclusivo">Exclusivo</span>
+                            </div>
+                        </div>
+                        <div class="prod-img-wrap">
+                            <img src="img/electrico.JPG" alt="Pegante Blanco" class="prod-img">
+                        </div>
+                        <div class="prod-info">
+                            <p class="prod-brand">Corona</p>
+                            <p class="prod-name">Pegante Blanco Premium 25 kg — Para cerámica, porcelana y granito</p>
+                            <div class="prod-rating">
+                                <span class="prod-stars">★★★☆☆</span>
+                                <span class="prod-rating-count">(89)</span>
+                            </div>
+                            <div class="prod-price-box">
+                                <div class="prod-price-badge">
+                                    <span class="ppb-label">PRECIO INTERNET</span>
+                                    <span class="ppb-pct">-13%</span>
+                                </div>
+                                <p class="prod-price">$24.900 <span class="prod-unit">und</span></p>
+                                <p class="prod-price-was">$28.500 und</p>
+                            </div>
+                        </div>
+                    </article>
+
+                </div><!-- /prod-grid -->
+            </main>
+        </div><!-- /cat-layout -->
+    </div><!-- /cat-page -->
+
+    <footer class="cf-footer">
+        <div class="cf-footer-inner">
+            <div class="cf-footer-logo">
+                <span class="cf-footer-name">COMFER</span>
+                <span class="cf-footer-tagline">Unidos Construimos</span>
+            </div>
+            <div class="cf-footer-redes">
+                <a href="https://www.facebook.com" target="_blank"><img src="img/iconofacebook.png" alt="Facebook"></a>
+                <a href="https://www.instagram.com" target="_blank"><img src="img/iconoinstagram.png" alt="Instagram"></a>
+                <a href="https://wa.me/3156266703" target="_blank"><img src="img/iconowhatsapp.png" alt="WhatsApp"></a>
+            </div>
+            <div class="cf-footer-contact">
+                <p>&#128222; +57 (315) 626-6703</p>
+                <p><a href="mailto:info@comfer.co">info@comfer.co</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/cart.js"></script>
+    <script>
+        /* Inyectar botones "Agregar al carrito" en cada tarjeta */
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.prod-card').forEach(function (card) {
+                var id    = card.dataset.id;
+                var brand = card.dataset.brand || '';
+                var name  = card.dataset.name  || '';
+                var price = parseInt(card.dataset.precio || '0');
+                var emoji = card.dataset.emoji || '📦';
+                var info  = card.querySelector('.prod-info');
+                if (!info || !id) return;
+                var btn = document.createElement('button');
+                btn.className = 'btn-add-cart';
+                btn.textContent = '+ Agregar al carrito';
+                btn.addEventListener('click', function () {
+                    cfAddToCart(id, brand, name, price, emoji);
+                    btn.textContent = '✓ Agregado';
+                    btn.classList.add('added');
+                    setTimeout(function () {
+                        btn.textContent = '+ Agregar al carrito';
+                        btn.classList.remove('added');
+                    }, 1800);
+                });
+                info.appendChild(btn);
+            });
+        });
+
+        /* Acordeón de filtros */
+        function toggleFiltro(btn) {
+            var body = btn.nextElementSibling;
+            body.classList.toggle('hidden');
+            btn.classList.toggle('open');
+        }
+
+        /* Ordenar productos */
+        function ordenar(criterio) {
+            var grid = document.getElementById('prodGrid');
+            var cards = Array.from(grid.querySelectorAll('.prod-card'));
+            cards.sort(function(a, b) {
+                if (criterio === 'precio-asc')  return parseInt(a.dataset.precio) - parseInt(b.dataset.precio);
+                if (criterio === 'precio-desc') return parseInt(b.dataset.precio) - parseInt(a.dataset.precio);
+                if (criterio === 'rating')      return parseInt(b.dataset.rating)  - parseInt(a.dataset.rating);
+                if (criterio === 'descuento')   return parseInt(b.dataset.desc)    - parseInt(a.dataset.desc);
+                return 0;
+            });
+            cards.forEach(function(c) { grid.appendChild(c); });
+        }
+
+        /* Filtrar desde búsqueda en URL */
+        function filtrarCatalogo(q) {
+            if (!q) return;
+            q = q.toLowerCase();
+            var cards = document.querySelectorAll('.prod-card');
+            var vis = 0;
+            cards.forEach(function(c) {
+                var txt = c.textContent.toLowerCase();
+                if (txt.includes(q)) { c.style.display = ''; vis++; }
+                else c.style.display = 'none';
+            });
+            document.getElementById('catCount').textContent =
+                'Mostrando ' + vis + ' resultado(s) para "' + q + '"';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promociones - COMFER</title>
+    <link rel="stylesheet" href="css/comfer.css">
+    <style>
+        .promo-banner {
+            background:linear-gradient(135deg,#1a1a1a 0%,#333 100%);
+            border-radius:12px; padding:28px 32px; color:#fff;
+            display:flex; align-items:center; justify-content:space-between;
+            gap:20px; flex-wrap:wrap; margin-bottom:28px;
+        }
+        .promo-banner h2 { font-size:22px; font-weight:900; margin-bottom:6px; }
+        .promo-banner p  { font-size:13.5px; opacity:0.8; }
+        .promo-badge-big {
+            background:var(--cf-orange); color:#fff; font-size:36px; font-weight:900;
+            padding:10px 22px; border-radius:8px; white-space:nowrap;
+        }
+        .promo-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+        .promo-card {
+            background:#fff; border:1px solid #e0e0e0; border-radius:8px;
+            overflow:hidden; transition:box-shadow 0.2s, transform 0.2s;
+        }
+        .promo-card:hover { box-shadow:0 6px 22px rgba(0,0,0,0.13); transform:translateY(-3px); }
+        .promo-card-img {
+            height:150px; display:flex; align-items:center;
+            justify-content:center; font-size:48px;
+        }
+        .promo-card-body { padding:12px 14px 14px; }
+        .promo-pct {
+            display:inline-block; background:var(--cf-orange); color:#fff;
+            font-size:12px; font-weight:900; padding:2px 8px; border-radius:4px; margin-bottom:6px;
+        }
+        .promo-nombre { font-size:13.5px; font-weight:600; color:#1a1a1a; line-height:1.35; margin-bottom:8px; }
+        .promo-precio-act { font-size:18px; font-weight:700; color:#1a1a1a; }
+        .promo-precio-ant { font-size:12px; color:#aaa; text-decoration:line-through; }
+        .promo-timer { display:flex; gap:8px; align-items:center; }
+        .promo-time-box {
+            background:#1a1a1a; color:#fff; border-radius:5px;
+            padding:6px 10px; text-align:center; min-width:44px;
+        }
+        .promo-time-num { font-size:20px; font-weight:700; display:block; line-height:1; }
+        .promo-time-lbl { font-size:9px; color:#aaa; display:block; margin-top:2px; }
+        .promo-time-sep { font-size:22px; font-weight:700; color:var(--cf-orange); }
+    </style>
+</head>
+<body>
+    <script src="js/nav.js"></script>
+
+    <!-- HERO -->
+    <div class="page-hero">
+        <div class="page-hero-inner">
+            <h1>Promociones</h1>
+            <p>Las mejores ofertas en materiales de construcción. Descuentos hasta del 60% en productos seleccionados. ¡Aprovechalos antes de que se agoten!</p>
+        </div>
+    </div>
+
+    <div class="page-content">
+
+        <!-- Oferta del día con timer -->
+        <div class="promo-banner">
+            <div>
+                <h2>🔥 Oferta del día — Cemento Argos 50kg</h2>
+                <p>Solo por hoy: precio especial en cemento Portland gris. Compra mínima 10 bolsas.</p>
+                <div class="promo-timer" style="margin-top:14px;" id="timer">
+                    <div class="promo-time-box"><span class="promo-time-num" id="th">08</span><span class="promo-time-lbl">HORAS</span></div>
+                    <span class="promo-time-sep">:</span>
+                    <div class="promo-time-box"><span class="promo-time-num" id="tm">34</span><span class="promo-time-lbl">MIN</span></div>
+                    <span class="promo-time-sep">:</span>
+                    <div class="promo-time-box"><span class="promo-time-num" id="ts">59</span><span class="promo-time-lbl">SEG</span></div>
+                </div>
+            </div>
+            <div style="text-align:center;">
+                <div class="promo-badge-big">-35%</div>
+                <p style="margin-top:8px;font-size:18px;font-weight:700;">$22.685 <s style="font-size:13px;opacity:0.6;">$34.900</s></p>
+            </div>
+        </div>
+
+        <!-- Grid de promociones -->
+        <p class="page-section-title" style="margin-bottom:16px;">Todas las ofertas</p>
+
+        <div class="promo-grid">
+
+            <div class="promo-card">
+                <div class="promo-card-img" style="background:linear-gradient(135deg,#C17A3A,#8B3A0A)">🔩</div>
+                <div class="promo-card-body">
+                    <span class="promo-pct">-49%</span>
+                    <p class="promo-nombre">Varilla Corrugada 1/2" x 6m — Siderúrgica del Occidente</p>
+                    <p class="promo-precio-act">$45.000</p>
+                    <p class="promo-precio-ant">$89.000 und</p>
+                </div>
+            </div>
+
+            <div class="promo-card">
+                <div class="promo-card-img" style="background:linear-gradient(135deg,#64B5F6,#1565C0)">🎨</div>
+                <div class="promo-card-body">
+                    <span class="promo-pct">-40%</span>
+                    <p class="promo-nombre">Pintura Caucho Blanca 4 Gal — Pintuco</p>
+                    <p class="promo-precio-act">$89.900</p>
+                    <p class="promo-precio-ant">$149.900 und</p>
+                </div>
+            </div>
+
+            <div class="promo-card">
+                <div class="promo-card-img" style="background:linear-gradient(135deg,#1565C0,#0D2B6E)">💧</div>
+                <div class="promo-card-body">
+                    <span class="promo-pct">-34%</span>
+                    <p class="promo-nombre">Impermeabilizante Sika Látex 4 L — Sika</p>
+                    <p class="promo-precio-act">$124.900</p>
+                    <p class="promo-precio-ant">$189.000 und</p>
+                </div>
+            </div>
+
+            <div class="promo-card">
+                <div class="promo-card-img" style="background:linear-gradient(135deg,#C62828,#8D1515)">🧱</div>
+                <div class="promo-card-body">
+                    <span class="promo-pct">-27%</span>
+                    <p class="promo-nombre">Ladrillo Farol No.5 x12 und — Ladrillera Santafé</p>
+                    <p class="promo-precio-act">$10.890</p>
+                    <p class="promo-precio-ant">$14.900 und</p>
+                </div>
+            </div>
+
+            <div class="promo-card">
+                <div class="promo-card-img" style="background:linear-gradient(135deg,#455A64,#1A237E)">🪠</div>
+                <div class="promo-card-body">
+                    <span class="promo-pct">-19%</span>
+                    <p class="promo-nombre">Tubo PVC Alcantarillado 4" x 3m — Pavco Wavin</p>
+                    <p class="promo-precio-act">$28.500</p>
+                    <p class="promo-precio-ant">$35.000 und</p>
+                </div>
+            </div>
+
+            <div class="promo-card">
+                <div class="promo-card-img" style="background:linear-gradient(135deg,#546E7A,#263238)">🔗</div>
+                <div class="promo-card-body">
+                    <span class="promo-pct">-17%</span>
+                    <p class="promo-nombre">Malla Electrosoldada 15×15×3.5 mm — Correval</p>
+                    <p class="promo-precio-act">$156.000</p>
+                    <p class="promo-precio-ant">$189.000 und</p>
+                </div>
+            </div>
+
+            <div class="promo-card">
+                <div class="promo-card-img" style="background:linear-gradient(135deg,#F5E6D0,#C8A87A)">🏺</div>
+                <div class="promo-card-body">
+                    <span class="promo-pct">-13%</span>
+                    <p class="promo-nombre">Pegante Blanco Premium 25 kg — Corona</p>
+                    <p class="promo-precio-act">$24.900</p>
+                    <p class="promo-precio-ant">$28.500 und</p>
+                </div>
+            </div>
+
+            <div class="promo-card">
+                <div class="promo-card-img" style="background:linear-gradient(135deg,#9E9E9E,#424242)">🏗️</div>
+                <div class="promo-card-body">
+                    <span class="promo-pct">-4%</span>
+                    <p class="promo-nombre">Cemento Portland Gris 50 kg — Argos</p>
+                    <p class="promo-precio-act">$34.900</p>
+                    <p class="promo-precio-ant">$36.500 und</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div style="text-align:center;margin-top:28px;">
+            <a href="catalogo.html" style="background:var(--cf-orange);color:#fff;padding:14px 40px;border-radius:8px;font-size:15px;font-weight:700;text-decoration:none;">
+                Ver catálogo completo →
+            </a>
+        </div>
+
+    </div>
+
+    <footer class="cf-footer">
+        <div class="cf-footer-inner">
+            <div class="cf-footer-logo">
+                <span class="cf-footer-name">COMFER</span>
+                <span class="cf-footer-tagline">Unidos Construimos</span>
+            </div>
+            <div class="cf-footer-redes">
+                <a href="https://www.facebook.com" target="_blank"><img src="img/iconofacebook.png" alt="Facebook"></a>
+                <a href="https://www.instagram.com" target="_blank"><img src="img/iconoinstagram.png" alt="Instagram"></a>
+                <a href="https://wa.me/3156266703" target="_blank"><img src="img/iconowhatsapp.png" alt="WhatsApp"></a>
+            </div>
+            <div class="cf-footer-contact">
+                <p>&#128222; +57 (315) 626-6703</p>
+                <p><a href="mailto:info@comfer.co">info@comfer.co</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        /* Countdown timer */
+        var end = new Date();
+        end.setHours(end.getHours() + 8, end.getMinutes() + 34, end.getSeconds() + 59);
+
+        function tick() {
+            var now  = new Date();
+            var diff = Math.max(0, Math.floor((end - now) / 1000));
+            var h = Math.floor(diff / 3600);
+            var m = Math.floor((diff % 3600) / 60);
+            var s = diff % 60;
+            document.getElementById('th').textContent = String(h).padStart(2,'0');
+            document.getElementById('tm').textContent = String(m).padStart(2,'0');
+            document.getElementById('ts').textContent = String(s).padStart(2,'0');
+            if (diff > 0) setTimeout(tick, 1000);
+        }
+        tick();
+    </script>
+    <script src="js/cart.js"></script>
+</body>
+</html>

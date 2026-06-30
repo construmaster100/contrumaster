@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago Nequi — COMFER</title>
+    <link rel="stylesheet" href="css/comfer.css">
+    <style>
+        /* ── Base ── */
+        body { background: #0c0b14; min-height: 100vh; }
+
+        .nq-page {
+            min-height: calc(100vh - 120px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 28px 16px;
+        }
+
+        /* ── Tarjeta principal ── */
+        .nq-card {
+            display: flex;
+            background: #12101f;
+            border-radius: 16px;
+            overflow: hidden;
+            width: 100%;
+            max-width: 900px;
+            border: 1px solid rgba(255,255,255,0.07);
+            box-shadow: 0 8px 48px rgba(0,0,0,0.6);
+        }
+
+        /* ══════════════════════════════
+           COLUMNA IZQUIERDA
+        ══════════════════════════════ */
+        .nq-left {
+            width: 340px;
+            flex-shrink: 0;
+            background: #0f0d1c;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 34px 26px 26px;
+            border-right: 1px solid rgba(255,255,255,0.06);
+        }
+
+        /* Logo Nequi */
+        .nq-logo-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+        .nq-logo-box {
+            width: 44px; height: 44px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #7b2fbe 0%, #b040e0 100%);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 22px; font-weight: 900; color: #fff;
+            box-shadow: 0 3px 14px rgba(123,47,190,0.55);
+            font-family: Arial, sans-serif;
+        }
+        .nq-logo-text {
+            font-size: 26px; font-weight: 900; color: #fff;
+            font-family: Arial, sans-serif; letter-spacing: -0.3px;
+        }
+
+        /* Subtitle */
+        .nq-subtitle {
+            font-size: 12.5px;
+            color: rgba(255,255,255,0.38);
+            text-align: center;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+
+        /* Badge pago seguro */
+        .nq-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            border: 1px solid rgba(255,140,0,0.5);
+            color: rgba(255,255,255,0.65);
+            font-size: 12px;
+            font-weight: 500;
+            padding: 6px 18px;
+            border-radius: 20px;
+            margin-bottom: 22px;
+        }
+        .nq-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: #ff8c00;
+            box-shadow: 0 0 6px #ff8c00, 0 0 12px rgba(255,140,0,0.5);
+            animation: dotPulse 2s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+        @keyframes dotPulse {
+            0%,100% { box-shadow: 0 0 5px #ff8c00; }
+            50%      { box-shadow: 0 0 10px #ff8c00, 0 0 20px rgba(255,140,0,0.4); }
+        }
+
+        /* QR con glow naranja */
+        .nq-qr-frame {
+            border-radius: 14px;
+            padding: 3px;
+            background: linear-gradient(145deg, #ff8c00, #ff4500 50%, #ff8c00);
+            box-shadow:
+                0 0 0 0 transparent,
+                0 0 20px rgba(255,140,0,0.7),
+                0 0 40px rgba(255,100,0,0.45),
+                0 0 70px rgba(255,60,0,0.2);
+            animation: frameGlow 2.8s ease-in-out infinite;
+            margin-bottom: 24px;
+        }
+        @keyframes frameGlow {
+            0%,100% {
+                box-shadow: 0 0 20px rgba(255,140,0,0.7), 0 0 40px rgba(255,100,0,0.45), 0 0 70px rgba(255,60,0,0.2);
+            }
+            50% {
+                box-shadow: 0 0 28px rgba(255,140,0,0.95), 0 0 55px rgba(255,100,0,0.65), 0 0 90px rgba(255,60,0,0.35);
+            }
+        }
+        .nq-qr-inner {
+            background: #fff;
+            border-radius: 12px;
+            padding: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #qrSvg { width: 210px; height: 210px; display: block; }
+
+        /* Número Nequi */
+        .nq-num-box {
+            width: 100%;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.09);
+            border-radius: 10px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .nq-num-label {
+            font-size: 10px;
+            color: #ff8c00;
+            letter-spacing: 0.8px;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+        .nq-num-val {
+            font-size: 22px;
+            font-weight: 900;
+            color: #ff8c00;
+            letter-spacing: 5px;
+            text-shadow: 0 0 12px rgba(255,140,0,0.5);
+            font-family: 'Courier New', monospace;
+        }
+        .nq-copy-btn {
+            background: transparent;
+            border: 1.5px solid #ff8c00;
+            color: #ff8c00;
+            padding: 8px 16px;
+            border-radius: 7px;
+            font-size: 12.5px;
+            font-weight: 700;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+        .nq-copy-btn:hover {
+            background: rgba(255,140,0,0.12);
+            box-shadow: 0 0 12px rgba(255,140,0,0.3);
+        }
+
+        /* Pie izquierdo */
+        .nq-foot {
+            margin-top: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            color: rgba(255,255,255,0.22);
+        }
+        .nq-foot svg { flex-shrink: 0; }
+
+        /* ══════════════════════════════
+           COLUMNA DERECHA
+        ══════════════════════════════ */
+        .nq-right {
+            flex: 1;
+            padding: 34px 32px 28px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nq-how-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 22px;
+        }
+
+        /* Pasos */
+        .nq-steps { display: flex; flex-direction: column; gap: 14px; }
+
+        .nq-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 13px;
+        }
+        .nq-step-n {
+            width: 28px; height: 28px; border-radius: 50%;
+            background: #ff8c00;
+            color: #000;
+            font-size: 12.5px; font-weight: 900;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 0 10px rgba(255,140,0,0.45);
+            margin-top: 1px;
+        }
+        .nq-step-body { min-width: 0; }
+        .nq-step-h { font-size: 13.5px; font-weight: 700; color: #fff; margin-bottom: 2px; }
+        .nq-step-p { font-size: 12px; color: rgba(255,255,255,0.42); line-height: 1.55; }
+        .nq-step-p a { color: #ff8c00; text-decoration: none; }
+        .nq-step-p a:hover { text-decoration: underline; }
+        .nq-hl { color: #ff8c00; font-weight: 700; }
+
+        /* Formulario */
+        .nq-form {
+            margin-top: 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .nq-field-lbl {
+            font-size: 11px;
+            color: rgba(255,255,255,0.38);
+            letter-spacing: 0.4px;
+            margin-bottom: 5px;
+            display: block;
+        }
+        .nq-field {
+            width: 100%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            padding: 11px 14px;
+            font-size: 15px;
+            color: rgba(255,255,255,0.5);
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .nq-field:focus {
+            border-color: rgba(255,140,0,0.5);
+            box-shadow: 0 0 12px rgba(255,140,0,0.15);
+            color: #fff;
+        }
+        .nq-field::placeholder { color: rgba(255,255,255,0.2); }
+
+        /* Botones inferiores */
+        .nq-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 20px;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .nq-btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: rgba(255,255,255,0.55);
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.18s;
+        }
+        .nq-btn-back:hover { background: rgba(255,255,255,0.09); color: #fff; }
+
+        .nq-btn-done {
+            background: linear-gradient(135deg, #ff8c00 0%, #ff4500 100%);
+            border: none;
+            color: #fff;
+            padding: 11px 28px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            letter-spacing: 0.3px;
+            box-shadow: 0 4px 18px rgba(255,140,0,0.42);
+            transition: all 0.2s;
+        }
+        .nq-btn-done:hover { transform: translateY(-1px); box-shadow: 0 6px 26px rgba(255,140,0,0.6); }
+
+        .nq-secure {
+            display: flex; align-items: center; gap: 6px;
+            font-size: 11px; color: rgba(255,255,255,0.22);
+        }
+
+        /* Timer */
+        .nq-timer-row {
+            text-align: center;
+            font-size: 11.5px;
+            color: rgba(255,255,255,0.28);
+            margin-top: 13px;
+        }
+        .nq-timer-row span { color: #ff8c00; font-weight: 700; }
+
+        /* Pantalla de éxito */
+        .nq-success {
+            width: 100%;
+            padding: 70px 30px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+        }
+        .nq-success-icon { font-size: 68px; filter: drop-shadow(0 0 18px rgba(255,140,0,0.8)); }
+        .nq-success h2 { color: #fff; font-size: 24px; font-weight: 900; margin: 0; }
+        .nq-success p { color: rgba(255,255,255,0.5); font-size: 14.5px; max-width: 400px; line-height: 1.7; margin: 0; }
+    </style>
+</head>
+<body>
+    <script src="js/nav.js"></script>
+    <script src="js/cart.js"></script>
+
+    <section class="nq-page">
+        <div class="nq-card" id="nqCard">
+
+            <!-- ══ IZQUIERDA ══ -->
+            <div class="nq-left">
+
+                <div class="nq-logo-row">
+                    <div class="nq-logo-box">N</div>
+                    <span class="nq-logo-text">nequi</span>
+                </div>
+
+                <p class="nq-subtitle">Escanea el QR con la app Nequi para pagar</p>
+
+                <div class="nq-badge">
+                    <span class="nq-dot"></span>
+                    Pago seguro activo
+                </div>
+
+                <div class="nq-qr-frame">
+                    <div class="nq-qr-inner">
+                        <svg id="qrSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 203 203"></svg>
+                    </div>
+                </div>
+
+                <div class="nq-num-box">
+                    <div>
+                        <p class="nq-num-label">Número Nequi</p>
+                        <p class="nq-num-val">315&nbsp;&nbsp;626&nbsp;&nbsp;6703</p>
+                    </div>
+                    <button class="nq-copy-btn" id="copyBtn">Copiar</button>
+                </div>
+
+                <div class="nq-timer-row" style="width:100%;margin-top:12px;">
+                    Código expira en <span id="nqTimer">10:00</span>
+                </div>
+
+                <div class="nq-foot">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                    Pago cifrado · Nequi Colombia
+                </div>
+            </div>
+
+            <!-- ══ DERECHA ══ -->
+            <div class="nq-right">
+
+                <div class="nq-how-title">
+                    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                    </svg>
+                    Cómo pagar
+                </div>
+
+                <div class="nq-steps">
+                    <div class="nq-step">
+                        <div class="nq-step-n">1</div>
+                        <div class="nq-step-body">
+                            <p class="nq-step-h">Abre la app Nequi</p>
+                            <p class="nq-step-p">Ingresa a tu cuenta Nequi en tu smartphone.</p>
+                        </div>
+                    </div>
+                    <div class="nq-step">
+                        <div class="nq-step-n">2</div>
+                        <div class="nq-step-body">
+                            <p class="nq-step-h">Toca "Enviar Plata" o "Pagar"</p>
+                            <p class="nq-step-p">Elige la opción de transferir a otro número o escanear QR.</p>
+                        </div>
+                    </div>
+                    <div class="nq-step">
+                        <div class="nq-step-n">3</div>
+                        <div class="nq-step-body">
+                            <p class="nq-step-h">Escanea el QR o ingresa el número</p>
+                            <p class="nq-step-p">Apunta la cámara al código QR o escribe el número<br>
+                                <span class="nq-hl">315 626 6703</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="nq-step">
+                        <div class="nq-step-n">4</div>
+                        <div class="nq-step-body">
+                            <p class="nq-step-h">Ingresa el monto exacto</p>
+                            <p class="nq-step-p">Escribe el valor de tu pedido y confirma la transacción.</p>
+                        </div>
+                    </div>
+                    <div class="nq-step">
+                        <div class="nq-step-n">5</div>
+                        <div class="nq-step-body">
+                            <p class="nq-step-h">Envía el comprobante</p>
+                            <p class="nq-step-p">Captura la pantalla y envíala por WhatsApp al
+                                <a href="https://wa.me/3156266703" target="_blank">+57 315 626-6703</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nq-form">
+                    <div>
+                        <label class="nq-field-lbl">Monto a pagar (COP)</label>
+                        <input class="nq-field" id="montoInput" type="text" placeholder="$ 0" readonly>
+                    </div>
+                    <div>
+                        <label class="nq-field-lbl">Referencia / Nº de pedido (opcional)</label>
+                        <input class="nq-field" type="text" placeholder="Referencia / Nº de pedido (opcional)">
+                    </div>
+                </div>
+
+                <div class="nq-actions">
+                    <a href="catalogo.html" class="nq-btn-back">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                        Volver al carrito
+                    </a>
+                    <div class="nq-secure">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        Pago cifrado · Nequi Colombia
+                    </div>
+                    <button class="nq-btn-done" onclick="nqConfirmar()">Ya pagué ✓</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="cf-footer">
+        <div class="cf-footer-inner">
+            <div class="cf-footer-logo">
+                <span class="cf-footer-name">COMFER</span>
+                <span class="cf-footer-tagline">Unidos Construimos</span>
+            </div>
+            <div class="cf-footer-redes">
+                <a href="https://www.facebook.com" target="_blank"><img src="img/iconofacebook.png" alt="Facebook"></a>
+                <a href="https://www.instagram.com" target="_blank"><img src="img/iconoinstagram.png" alt="Instagram"></a>
+                <a href="https://wa.me/3156266703" target="_blank"><img src="img/iconowhatsapp.png" alt="WhatsApp"></a>
+            </div>
+            <div class="cf-footer-contact">
+                <p>&#128222; +57 (315) 626-6703</p>
+                <p><a href="mailto:info@comfer.co">info@comfer.co</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+    /* ── Monto desde URL o localStorage ── */
+    (function () {
+        var params = new URLSearchParams(window.location.search);
+        var total  = params.get('total');
+        var input  = document.getElementById('montoInput');
+        if (!input) return;
+        if (total && parseInt(total) > 0) {
+            input.value = '$ ' + parseInt(total).toLocaleString('es-CO');
+        } else {
+            try {
+                var cart = JSON.parse(localStorage.getItem('cfCart') || '[]');
+                var sub  = cart.reduce(function (s, i) { return s + i.price * i.qty; }, 0);
+                if (sub > 0) input.value = '$ ' + sub.toLocaleString('es-CO');
+            } catch (e) {}
+        }
+    })();
+
+    /* ── Generador QR ── */
+    (function () {
+        /* QR de 29 módulos, celda 7px → 203px total */
+        var M = 29, CELL = 7;
+        var grid = [];
+        for (var r = 0; r < M; r++) { grid[r] = []; for (var c = 0; c < M; c++) grid[r][c] = 0; }
+
+        /* Marca módulos dark (1) */
+        function set(r, c, v) { if (r >= 0 && r < M && c >= 0 && c < M) grid[r][c] = v; }
+
+        /* Patrón finder 7×7 */
+        function finder(sr, sc) {
+            for (var dr = 0; dr < 7; dr++)
+                for (var dc = 0; dc < 7; dc++) {
+                    var on = (dr === 0 || dr === 6 || dc === 0 || dc === 6) ||
+                             (dr >= 2 && dr <= 4 && dc >= 2 && dc <= 4);
+                    set(sr + dr, sc + dc, on ? 1 : 2); /* 2 = light but reserved */
+                }
+        }
+        finder(0,  0);   /* top-left     */
+        finder(0,  M-7); /* top-right    */
+        finder(M-7, 0);  /* bottom-left  */
+
+        /* Separadores (0-band alrededor de cada finder) */
+        function separator(rows, cols) {
+            rows.forEach(function(r){ cols.forEach(function(c){ if (grid[r][c] === 0) set(r, c, 2); }); });
+        }
+        for (var i = 0; i <= 7; i++) {
+            set(7, i, 2); set(i, 7, 2);          /* top-left sep */
+            set(7, M-1-i, 2); set(i, M-8, 2);    /* top-right sep */
+            set(M-8, i, 2); set(M-1-i, 7, 2);    /* bottom-left sep */
+        }
+
+        /* Timing patterns (fila 6 y col 6) */
+        for (var t = 8; t < M - 8; t++) {
+            if (grid[6][t] === 0) set(6, t, t % 2 === 0 ? 1 : 2);
+            if (grid[t][6] === 0) set(t, 6, t % 2 === 0 ? 1 : 2);
+        }
+
+        /* Alignment pattern (centro ~ módulo 16,16 para v3) */
+        var AC = 20; /* aprox para M=29 */
+        for (var ar = AC-2; ar <= AC+2; ar++)
+            for (var ac2 = AC-2; ac2 <= AC+2; ac2++) {
+                if (grid[ar][ac2] !== 0) continue;
+                var onAl = (ar === AC-2 || ar === AC+2 || ac2 === AC-2 || ac2 === AC+2) || (ar === AC && ac2 === AC);
+                set(ar, ac2, onAl ? 1 : 2);
+            }
+
+        /* Módulos de datos: XORSHIFT pseudo-aleatorio */
+        var seed = 0x4EFCBA91;
+        function rng() { seed ^= seed << 13; seed ^= seed >> 17; seed ^= seed << 5; return (seed >>> 0) & 1; }
+        for (var r2 = 0; r2 < M; r2++)
+            for (var c2 = 0; c2 < M; c2++)
+                if (grid[r2][c2] === 0 && rng()) grid[r2][c2] = 1;
+
+        /* Renderizar a SVG */
+        var rects = [];
+        for (var r3 = 0; r3 < M; r3++)
+            for (var c3 = 0; c3 < M; c3++)
+                if (grid[r3][c3] === 1)
+                    rects.push('<rect x="' + (c3*CELL) + '" y="' + (r3*CELL) + '" width="' + CELL + '" height="' + CELL + '" fill="#000"/>');
+
+        var svg = document.getElementById('qrSvg');
+        svg.setAttribute('viewBox', '0 0 ' + (M*CELL) + ' ' + (M*CELL));
+        svg.innerHTML = rects.join('');
+    })();
+
+    /* ── Countdown 10 min ── */
+    (function () {
+        var rem = 600;
+        function tick() {
+            var m = Math.floor(rem / 60), s = rem % 60;
+            var el = document.getElementById('nqTimer');
+            if (el) el.textContent = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+            if (rem > 0) rem--;
+        }
+        tick();
+        setInterval(tick, 1000);
+    })();
+
+    /* ── Copiar número ── */
+    document.getElementById('copyBtn').addEventListener('click', function () {
+        try { navigator.clipboard.writeText('3156266703'); } catch(e) {}
+        var btn = this;
+        btn.textContent = '✓ Copiado';
+        btn.style.background = 'rgba(255,140,0,0.18)';
+        setTimeout(function () { btn.textContent = 'Copiar'; btn.style.background = ''; }, 2200);
+    });
+
+    /* ── Confirmar pago ── */
+    function nqConfirmar() {
+        localStorage.removeItem('cfCart');
+        localStorage.setItem('cfCartCount', '0');
+        var card = document.getElementById('nqCard');
+        card.innerHTML =
+            '<div class="nq-success">' +
+            '<div class="nq-success-icon">✅</div>' +
+            '<h2>¡Pago registrado!</h2>' +
+            '<p>Tu pedido fue recibido. En breve recibirás confirmación por WhatsApp al ' +
+            '<strong style="color:#ff8c00">+57 315 626-6703</strong>.</p>' +
+            '<a href="index.html" style="margin-top:6px;background:linear-gradient(135deg,#ff8c00,#ff4500);' +
+            'color:#fff;padding:13px 36px;border-radius:9px;font-weight:700;font-size:14px;' +
+            'text-decoration:none;box-shadow:0 4px 20px rgba(255,140,0,0.5);">Volver al inicio</a>' +
+            '</div>';
+    }
+    </script>
+</body>
+</html>
